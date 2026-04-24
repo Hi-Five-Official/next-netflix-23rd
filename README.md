@@ -64,7 +64,7 @@
 - [조직 레포를 우회해 무료 배포하는 법](https://bori-note.tistory.com/73)
 
 (랜딩페이지 Netflix 로고)
-- [랜딩페이지 영상](https://lottiefiles.com/kr/)
+- [랜딩페이지 영상](https://lottiefiles.com/free-animation/netflix-logo-swoop-6nEmnysrGE)
 
 (Next.js)
 - [Next.js Docs](https://nextjs.org/docs)
