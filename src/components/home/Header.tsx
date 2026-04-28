@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className="w-full px-4 py-6 text-white">
       <div className="flex flex-row items-center justify-between">
-        <NetflixIcon className="size-14" />
+        <NetflixIcon className="size-14 cursor-pointer" />
         {HEADER_NAV_ITEMS.map(({ label, href }) => (
           <Link key={href} href={href} className="text-body-1">
             {label}
