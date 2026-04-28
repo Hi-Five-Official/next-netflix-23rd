@@ -1,5 +1,9 @@
-import type { Metadata } from "next";
 import "@/app/globals.css";
+
+import type { Metadata } from "next";
+
+import BottomNavbar from "@/components/common/BottomNavbar";
+import HomeIndicator from "@/components/common/HomeIndicator";
 
 export const metadata: Metadata = {
   title: "Next Netflix",
@@ -7,12 +11,31 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  openGraph: {
+    title: "Next Netflix",
+    description: "CEOS 23rd Week 5&6 Frontend Pair Project",
+    images: [
+      {
+        url: "https://next-netflix-23rd.vercel.app/og_image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className="h-full bg-white">{children}</body>
+      <body className="flex justify-center bg-white">
+        <div className="relative min-h-dvh w-93.75 bg-black">
+          {children}
+          <div className="fixed bottom-0 w-[inherit]">
+            <BottomNavbar />
+            <HomeIndicator />
+          </div>
+        </div>
+      </body>
     </html>
   );
 }
