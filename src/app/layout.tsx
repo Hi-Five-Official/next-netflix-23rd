@@ -1,5 +1,8 @@
-import type { Metadata } from "next";
 import "@/app/globals.css";
+
+import type { Metadata } from "next";
+
+import HomeIndicator from "@/components/common/HomeIndicator";
 
 export const metadata: Metadata = {
   title: "Next Netflix",
@@ -23,7 +26,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className="h-full bg-white">{children}</body>
+      <body className="flex justify-center bg-black text-white">
+        <div className="relative h-screen w-93.75">
+          {children}
+          <HomeIndicator />
+        </div>
+      </body>
     </html>
   );
 }
