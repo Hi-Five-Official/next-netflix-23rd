@@ -1,1 +1,78 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Pretendard Variable";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/PretendardVariable.woff2") format("woff2");
+}
+
+@layer base {
+  body {
+    font-family: "Pretendard Variable", sans-serif;
+  }
+}
+
+@theme {
+  /* Black/White */
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* GrayScale */
+  --color-gray-900: #121212;
+  --color-gray-800: #424242;
+  --color-gray-700: #8c8787;
+  --color-gray-600: #c4c4c4;
+
+  /* Font Family */
+  --font-pretendard: "Pretendard Variable", sans-serif;
+
+  /* Typography - Heading 1 */
+  --text-heading-1: 1.5rem;
+  --text-heading-1--font-weight: 600;
+  --text-heading-1--line-height: 135%;
+  --text-heading-1--letter-spacing: -0.02em;
+
+  /* Typography - Heading 2 */
+  --text-heading-2: 1.25rem;
+  --text-heading-2--font-weight: 600;
+  --text-heading-2--line-height: 135%;
+  --text-heading-2--letter-spacing: -0.02em;
+
+  /* Typography - Body 1*/
+  --text-body-1: 1.125rem;
+  --text-body-1--font-weight: 400;
+  --text-body-1--line-height: 135%;
+  --text-body-1--letter-spacing: -0.02em;
+
+  /* Typography - Body 2 */
+  --text-body-2: 1rem;
+  --text-body-2--font-weight: 400;
+  --text-body-2--line-height: 135%;
+  --text-body-2--letter-spacing: -0.02em;
+
+  /* Typography - Label 1 */
+  --text-label-1: 1.25rem;
+  --text-label-1--font-weight: 600;
+  --text-label-1--line-height: 135%;
+  --text-label-1--letter-spacing: -0.02em;
+
+  /* Typography - Label 2 */
+  --text-label-2: 0.9375rem;
+  --text-label-2--font-weight: 400;
+  --text-label-2--line-height: 135%;
+  --text-label-2--letter-spacing: -0.02em;
+
+  /* Typography - Caption 1 */
+  --text-caption-1: 0.75rem;
+  --text-caption-1--font-weight: 400;
+  --text-caption-1--line-height: 135%;
+  --text-caption-1--letter-spacing: -0.02em;
+
+  /* Typography - Caption 2 */
+  --text-caption-2: 0.625rem;
+  --text-caption-2--font-weight: 500;
+  --text-caption-2--line-height: 135%;
+  --text-caption-2--letter-spacing: -0.02em;
+}
