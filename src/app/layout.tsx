@@ -7,6 +7,17 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  openGraph: {
+    title: "Next Netflix",
+    description: "CEOS 23rd Week 5&6 Frontend Pair Project",
+    images: [
+      {
+        url: "https://next-netflix-23rd.vercel.app/og_image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
