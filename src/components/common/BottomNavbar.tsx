@@ -21,7 +21,7 @@ const BottomNavbar = () => {
             href={href}
             className={cn(
               "flex flex-1 flex-col items-center gap-2 transition-all duration-300",
-              isActive ? "text-white" : "text-gray-700",
+              isActive ? "text-white" : "text-gray-700 hover:text-white",
             )}
           >
             <Icon className="size-4.5" />
