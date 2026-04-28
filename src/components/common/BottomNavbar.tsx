@@ -9,11 +9,10 @@ import { cn } from "@/utils/cn";
 const BottomNavbar = () => {
   const pathname = usePathname();
 
-  // if (pathname === "/") return null;
+  if (pathname === "/") return null;
 
-  // TODO : bg-gray-900 바꾸기, text-[10px] 제거, text-gray-700 바꾸기
   return (
-    <nav className="flex h-14 w-full items-center bg-amber-300 py-2">
+    <nav className="flex h-14 w-full items-center bg-gray-900">
       {NAV_ITEMS.map(({ label, href, Icon }) => {
         const isActive = pathname === href;
         return (
@@ -26,7 +25,7 @@ const BottomNavbar = () => {
             )}
           >
             <Icon className="size-4.5" />
-            <span className="text-caption2 text-[10px]">{label}</span>
+            <span className="text-caption-2">{label}</span>
           </Link>
         );
       })}
