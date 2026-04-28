@@ -3,9 +3,9 @@ export { default as DownloadIcon } from "@/assets/icons/icon_download_regular.sv
 export { default as HomeIcon } from "@/assets/icons/icon_home_regular.svg";
 export { default as InfoIcon } from "@/assets/icons/icon_info_regular.svg";
 export { default as MoreIcon } from "@/assets/icons/icon_more_regular.svg";
-export { default as NetflixIcon } from "@/assets/icons/icon_netflix_filled.svg";
-export { default as PlayCircleIcon } from "@/assets/icons/icon_play_circle_filled.svg";
-export { default as PlayIcon } from "@/assets/icons/icon_play_filled.svg";
+export { default as NetflixIcon } from "@/assets/icons/icon_netflix_fill.svg";
+export { default as PlayCircleIcon } from "@/assets/icons/icon_play_circle_fill.svg";
+export { default as PlayIcon } from "@/assets/icons/icon_play_fill.svg";
 export { default as PlusIcon } from "@/assets/icons/icon_plus_regular.svg";
 export { default as SearchIcon } from "@/assets/icons/icon_search_regular.svg";
 export { default as ThinSearchIcon } from "@/assets/icons/icon_search_thin.svg";
