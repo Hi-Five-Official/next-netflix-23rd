@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { NAV_ITEMS } from "@/constants/navItems";
+import { BOTTOM_NAV_ITEMS } from "@/constants/navItems";
 import { cn } from "@/utils/cn";
 
 const BottomNavbar = () => {
@@ -13,7 +13,7 @@ const BottomNavbar = () => {
 
   return (
     <nav className="flex h-14 w-full items-center bg-gray-900">
-      {NAV_ITEMS.map(({ label, href, Icon }) => {
+      {BOTTOM_NAV_ITEMS.map(({ label, href, Icon }) => {
         const isActive = pathname === href;
         return (
           <Link
