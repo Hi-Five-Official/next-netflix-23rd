@@ -1,4 +1,4 @@
-export { default as CommingSoonIcon } from "@/assets/icons/icon_comingsoon_regular.svg";
+export { default as ComingSoonIcon } from "@/assets/icons/icon_comingsoon_regular.svg";
 export { default as DownloadIcon } from "@/assets/icons/icon_download_regular.svg";
 export { default as HomeIcon } from "@/assets/icons/icon_home_regular.svg";
 export { default as InfoIcon } from "@/assets/icons/icon_info_regular.svg";

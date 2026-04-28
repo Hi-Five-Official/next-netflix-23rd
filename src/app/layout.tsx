@@ -2,6 +2,7 @@ import "@/app/globals.css";
 
 import type { Metadata } from "next";
 
+import BottomNavbar from "@/components/common/BottomNavbar";
 import HomeIndicator from "@/components/common/HomeIndicator";
 
 export const metadata: Metadata = {
@@ -26,10 +27,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className="flex justify-center bg-black text-white">
-        <div className="relative h-screen w-93.75">
+      <body className="flex justify-center bg-white">
+        <div className="relative min-h-dvh w-93.75 bg-black">
           {children}
-          <HomeIndicator />
+          <div className="fixed bottom-0 w-[inherit]">
+            <BottomNavbar />
+            <HomeIndicator />
+          </div>
         </div>
       </body>
     </html>
