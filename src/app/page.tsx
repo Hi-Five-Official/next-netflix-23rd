@@ -1,13 +1,45 @@
-import Link from "next/link";
+"use client";
 
-const page = () => {
+import Lottie from "lottie-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { NetflixIcon } from "@/assets/icons";
+import AnimationNetflix from "@/public/lotties/lottie_netflix_animation.json";
+
+const Page = () => {
+  const router = useRouter();
+  const [started, setStarted] = useState(false);
+
+  const handleStart = async () => {
+    if (started) return;
+    setStarted(true);
+    const audio = new Audio("/sounds/audio_netflix_animation.mp3");
+
+    try {
+      await audio.play();
+    } catch (error) {
+      console.error("오디오 재생 실패:", error);
+    }
+
+    setTimeout(() => {
+      audio.pause();
+      audio.currentTime = 0;
+      router.push("/home");
+    }, 3000);
+  };
+
   return (
-    <div>
-      <Link href="/home">
-        <button className="text-white">랜딩페이지. 클릭하면 홈으로 이동(임시)</button>
-      </Link>
+    <div className="relative flex h-screen w-full items-center justify-center">
+      {!started ? (
+        <button type="button" onClick={handleStart} className="cursor-pointer">
+          <NetflixIcon className="w-75 transition-transform duration-300 hover:scale-110" />
+        </button>
+      ) : (
+        <Lottie animationData={AnimationNetflix} loop={false} />
+      )}
     </div>
   );
 };
 
-export default page;
+export default Page;
