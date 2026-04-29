@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: new URL(process.env.NEXT_PUBLIC_IMAGE_BASE_URL!).hostname,
+        hostname: "image.tmdb.org",
       },
     ],
   },
