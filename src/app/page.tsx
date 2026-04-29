@@ -1,11 +1,13 @@
-import Link from "next/link";
+"use client";
+
+import Lottie from "lottie-react";
+
+import AnimationNetflix from "@/assets/lottie/lottie_netflix_logo_swoop.json";
 
 const page = () => {
   return (
-    <div>
-      <Link href="/home">
-        <button className="text-white">랜딩페이지. 클릭하면 홈으로 이동(임시)</button>
-      </Link>
+    <div className="relative flex h-screen w-full items-center justify-center">
+      <Lottie animationData={AnimationNetflix} loop={false} autoplay={true} />
     </div>
   );
 };
