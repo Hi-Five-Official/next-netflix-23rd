@@ -8,6 +8,13 @@
   src: url("/fonts/PretendardVariable.woff2") format("woff2");
 }
 
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @utility bg-gradient-thumbnail {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 87.26%, #000 100%);
 }
