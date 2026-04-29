@@ -15,7 +15,7 @@ const PreviewCarousel = ({ movies }: PreviewCarouselProps) => {
   return (
     <div
       ref={ref}
-      className="flex cursor-grab gap-1.75 overflow-hidden select-none active:cursor-grabbing"
+      className="flex cursor-pointer gap-1.75 overflow-hidden select-none"
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
       onMouseUp={onMouseUp}
