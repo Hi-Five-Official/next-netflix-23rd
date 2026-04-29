@@ -1,6 +1,10 @@
 import { tmdbClient } from "@/lib/apis/tmdbClient";
-import { TrendingAllResponse } from "@/types/tmdb";
+import { PopularMoviesResponse, TrendingAllResponse } from "@/types/tmdb";
 
-// 일간 트렌딩 미디어(영화 + TV) 정보를 가져오는 함수
+// 홈페이지 Top10 섹션
 export const getTrendingAll = () =>
   tmdbClient<TrendingAllResponse>("/trending/all/day?language=ko-KR");
+
+// 홈페이지 Preview 섹션
+export const getPopularMovies = () =>
+  tmdbClient<PopularMoviesResponse>("/movie/popular?language=ko-KR&page=1");

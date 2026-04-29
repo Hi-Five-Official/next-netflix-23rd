@@ -8,6 +8,7 @@ interface TmdbBase {
   popularity: number;
   vote_average: number;
   vote_count: number;
+  softcore: boolean;
 }
 
 export interface TmdbMovie extends TmdbBase {
@@ -38,3 +39,4 @@ export interface TmdbPaginatedResponse<T> {
 }
 
 export type TrendingAllResponse = TmdbPaginatedResponse<TmdbMedia>;
+export type PopularMoviesResponse = TmdbPaginatedResponse<TmdbMovie>;
