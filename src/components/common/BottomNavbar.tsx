@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { BOTTOM_NAV_ITEMS } from "@/constants/navItems";
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils/cn";
 
 const BottomNavbar = () => {
   const pathname = usePathname();
