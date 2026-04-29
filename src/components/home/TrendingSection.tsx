@@ -1,5 +1,4 @@
-import { InfoIcon, PlusIcon } from "@/assets/icons";
-import { PlayIcon } from "@/assets/icons";
+import { InfoIcon, PlayIcon, PlusIcon } from "@/assets/icons";
 import Button from "@/components/common/Button";
 import TrendingCarousel from "@/components/home/TrendingCarousel";
 import { getTrendingAll } from "@/lib/apis/tmdb";
@@ -9,9 +8,9 @@ const TrendingSection = async () => {
   const top10 = data.results.filter(item => item.poster_path !== null).slice(0, 10);
 
   return (
-    <div>
+    <div className="flex flex-col gap-3.5">
       <TrendingCarousel items={top10} />
-      <div className="flex flex-row items-center justify-center gap-11 pt-3.5">
+      <div className="flex flex-row items-center justify-center gap-11">
         <button className="flex cursor-pointer flex-col items-center gap-0.5 text-white">
           <PlusIcon className="size-6" />
           <span className="text-caption-1">My List</span>
