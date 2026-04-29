@@ -1,11 +1,11 @@
 "use client";
 
 import Lottie from "lottie-react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import AnimationNetflix from "@/../public/lottie_netflix_animation.json";
+import { NetflixIcon } from "@/assets/icons";
+import AnimationNetflix from "@/public/lottie_netflix_animation.json";
 
 const Landing = () => {
   const router = useRouter();
@@ -33,7 +33,7 @@ const Landing = () => {
     <div className="relative flex h-screen w-full items-center justify-center">
       {!started ? (
         <button type="button" onClick={handleStart} className="cursor-pointer">
-          <Image src="/og_image.png" alt="btnNetflix" width={300} height={300} />
+          <NetflixIcon className="w-[300px] hover:scale-110" />
         </button>
       ) : (
         <Lottie animationData={AnimationNetflix} loop={false} />
