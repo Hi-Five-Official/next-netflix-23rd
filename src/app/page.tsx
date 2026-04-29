@@ -7,7 +7,7 @@ import { useState } from "react";
 import { NetflixIcon } from "@/assets/icons";
 import AnimationNetflix from "@/public/lottie_netflix_animation.json";
 
-const Landing = () => {
+const Page = () => {
   const router = useRouter();
   const [started, setStarted] = useState(false);
 
@@ -42,4 +42,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Page;
