@@ -11,7 +11,7 @@ const Button = ({ children, icon, className, ...props }: ButtonProps) => {
   return (
     <button
       className={cn(
-        "flex h-11 cursor-pointer items-center justify-center rounded-sm bg-gray-600",
+        "flex h-11 cursor-pointer items-center justify-center rounded-sm bg-gray-600 transition-all duration-200 hover:bg-gray-800",
         className,
       )}
       {...props}
