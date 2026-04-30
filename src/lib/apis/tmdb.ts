@@ -8,3 +8,13 @@ export const getTrendingAll = () =>
 // 홈페이지 Preview 섹션
 export const getPopularMovies = () =>
   tmdbClient<PopularMoviesResponse>("/movie/popular?language=ko-KR&page=1");
+
+// 홈페이지 Netflix Originals 섹션
+export const getNetflixOriginals = () =>
+  tmdbClient<PopularMoviesResponse>("/discover/tv?with_networks=213&language=ko-KR&page=1");
+// 홈페이지 Korea Movies 섹션
+export const getKoreanMovies = () =>
+  tmdbClient<PopularMoviesResponse>("/discover/movie?with_origin_country=KR&language=ko-KR&page=1");
+// 홈페이지 Animation 섹션
+export const getAnimationMovies = () =>
+  tmdbClient<PopularMoviesResponse>("/discover/movie?with_genres=16&language=ko-KR&page=1");
