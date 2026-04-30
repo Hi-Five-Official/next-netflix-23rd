@@ -40,3 +40,6 @@ export interface TmdbPaginatedResponse<T> {
 
 export type TrendingAllResponse = TmdbPaginatedResponse<TmdbMedia>;
 export type PopularMoviesResponse = TmdbPaginatedResponse<TmdbMovie>;
+
+export type MovieListResponse = TmdbPaginatedResponse<TmdbMovie>;
+export type TvListResponse = TmdbPaginatedResponse<TmdbTv>;

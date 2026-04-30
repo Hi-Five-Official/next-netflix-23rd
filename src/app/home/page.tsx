@@ -1,4 +1,7 @@
+import AnimationMoviesSection from "@/components/home/AnimationMoviesSection";
 import Header from "@/components/home/Header";
+import KoreanMoviesSection from "@/components/home/KoreanMoviesSection";
+import NetflixOriginalsSection from "@/components/home/NetflixOriginalsSection";
 import PreviewSection from "@/components/home/PreviewSection";
 import TrendingSection from "@/components/home/TrendingSection";
 
@@ -9,11 +12,13 @@ const page = () => {
         <div className="absolute inset-x-0 top-0 z-10">
           <Header />
         </div>
-        <div className="flex flex-col gap-9">
+        <div className="flex flex-col gap-9 pb-28">
           <TrendingSection />
           <div className="flex flex-col gap-6 pl-3">
             <PreviewSection />
-            {/* 하단 섹션들 추가*/}
+            <NetflixOriginalsSection />
+            <AnimationMoviesSection />
+            <KoreanMoviesSection />
           </div>
         </div>
       </div>
