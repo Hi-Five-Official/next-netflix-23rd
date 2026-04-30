@@ -17,7 +17,7 @@ const page = async () => {
         <div className="absolute inset-x-0 top-0 z-10">
           <Header />
         </div>
-        <div className="flex flex-col gap-9">
+        <div className="flex flex-col gap-9 pb-28">
           <TrendingSection />
           <div className="flex flex-col gap-6 pl-3">
             <PreviewSection />
