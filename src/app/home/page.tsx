@@ -1,8 +1,16 @@
 import Header from "@/components/home/Header";
+import MediaCardSection from "@/components/home/MediaCardSection";
 import PreviewSection from "@/components/home/PreviewSection";
 import TrendingSection from "@/components/home/TrendingSection";
+import { getAnimationMovies, getKoreanMovies, getNetflixOriginals } from "@/lib/apis/tmdb";
 
-const page = () => {
+const page = async () => {
+  const [animationMovies, koreanMovies, netflixOriginals] = await Promise.all([
+    getAnimationMovies(),
+    getKoreanMovies(),
+    getNetflixOriginals(),
+  ]);
+
   return (
     <div>
       <div className="relative">
@@ -13,7 +21,9 @@ const page = () => {
           <TrendingSection />
           <div className="flex flex-col gap-6 pl-3">
             <PreviewSection />
-            {/* 하단 섹션들 추가*/}
+            <MediaCardSection title="Netflix Originals" items={netflixOriginals.results} />
+            <MediaCardSection title="Animation Movies" items={animationMovies.results} />
+            <MediaCardSection title="Korean Movies" items={koreanMovies.results} />
           </div>
         </div>
       </div>
