@@ -5,7 +5,7 @@ import NetflixOriginalsSection from "@/components/home/NetflixOriginalsSection";
 import PreviewSection from "@/components/home/PreviewSection";
 import TrendingSection from "@/components/home/TrendingSection";
 
-const page = async () => {
+const page = () => {
   return (
     <div>
       <div className="relative">
