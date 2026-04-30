@@ -22,7 +22,7 @@ const MediaCardCarousel = ({ items }: MediaCardCarouselProps) => {
       className="flex cursor-pointer gap-1.75 overflow-hidden select-none"
     >
       {items.map(item => {
-        const title = item.media_type === "movie" ? item.title : item.name;
+        const title = ("title" in item ? item.title : item.name) || "이미지 없음";
 
         return (
           <div key={item.id} className="relative h-[10rem] w-[6.4375rem] shrink-0 overflow-hidden">
