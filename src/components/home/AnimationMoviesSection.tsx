@@ -4,7 +4,7 @@ import { getAnimationMovies } from "@/lib/apis/tmdb";
 const AnimationMoviesSection = async () => {
   const data = await getAnimationMovies();
 
-  return <MediaCardSection title="Animation Movies" items={data.results} />;
+  return <MediaCardSection title="Animation Movies" items={data.results} size="small" />;
 };
 
 export default AnimationMoviesSection;

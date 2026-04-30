@@ -7,10 +7,13 @@ import { TmdbMedia } from "@/types/tmdb";
 
 interface MediaCardCarouselProps {
   items: TmdbMedia[];
+  size?: "small" | "large";
 }
 
-const MediaCardCarousel = ({ items }: MediaCardCarouselProps) => {
+const MediaCardCarousel = ({ items, size = "small" }: MediaCardCarouselProps) => {
   const { ref, onMouseDown, onMouseMove, onMouseUp, onMouseLeave } = useDragScroll();
+
+  const cardSize = size === "small" ? "w-[103px] h-[161px]" : "w-[154px] h-[251px]";
 
   return (
     <div
@@ -25,7 +28,10 @@ const MediaCardCarousel = ({ items }: MediaCardCarouselProps) => {
         const title = ("title" in item ? item.title : item.name) || "이미지 없음";
 
         return (
-          <div key={item.id} className="relative h-[10rem] w-[6.4375rem] shrink-0 overflow-hidden">
+          <div
+            key={item.id}
+            className={`relative shrink-0 overflow-hidden rounded-[2px] ${cardSize}`}
+          >
             <Image
               src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/t/p/w300${item.poster_path}`}
               alt={title}
