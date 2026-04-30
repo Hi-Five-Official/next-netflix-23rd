@@ -32,7 +32,7 @@ const page = () => {
             Netflix Home
           </Button>
         </Link>
-        <p className="text-caption-1 mt-25 flex gap-2 text-white">
+        <p className="text-caption-1 mt-20 flex gap-2 text-white">
           <span className="text-red-600">|</span> Error Code
           <span className="font-bold">NSES-404</span>
         </p>
