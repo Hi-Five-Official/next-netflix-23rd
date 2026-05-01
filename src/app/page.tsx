@@ -1,10 +1,10 @@
 "use client";
 
 import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 import { NetflixIcon } from "@/assets/icons";
 import AnimationNetflix from "@/public/lotties/lottie_netflix_animation.json";
