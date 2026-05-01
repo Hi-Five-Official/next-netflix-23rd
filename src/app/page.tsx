@@ -1,6 +1,8 @@
 "use client";
 
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
