@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getMediaTitle, getMediaType, getTmdbImageUrl } from "@/lib/utils/tmdb";
-import { TmdbMedia } from "@/types/tmdb";
+import { TmdbMedia } from "@/types/home";
 
 interface MediaThumbnailProps {
   item: TmdbMedia;

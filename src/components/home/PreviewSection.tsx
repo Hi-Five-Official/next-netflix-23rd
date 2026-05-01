@@ -1,5 +1,5 @@
 import MediaCardCarousel from "@/components/home/MediaCardCarousel";
-import { getPopularMovies } from "@/lib/apis/tmdb";
+import { getPopularMovies } from "@/lib/apis/home";
 
 const PreviewSection = async () => {
   const data = await getPopularMovies();

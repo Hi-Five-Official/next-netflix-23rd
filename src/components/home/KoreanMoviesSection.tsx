@@ -1,5 +1,5 @@
 import MediaCardCarousel from "@/components/home/MediaCardCarousel";
-import { getKoreanMovies } from "@/lib/apis/tmdb";
+import { getKoreanMovies } from "@/lib/apis/home";
 
 const KoreanMoviesSection = async () => {
   const data = await getKoreanMovies();

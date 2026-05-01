@@ -1,6 +1,12 @@
-import DragScrollCarousel from "@/components/home/DragScrollCarousel";
+"use client";
+
+import "swiper/css";
+
+import { FreeMode } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import MediaThumbnail from "@/components/home/MediaThumbnail";
-import { TmdbMedia } from "@/types/tmdb";
+import { TmdbMedia } from "@/types/home";
 
 interface MediaCardCarouselProps {
   items: TmdbMedia[];
@@ -10,11 +16,19 @@ interface MediaCardCarouselProps {
 
 const MediaCardCarousel = ({ items, shape = "rect", size = "small" }: MediaCardCarouselProps) => {
   return (
-    <DragScrollCarousel>
+    <Swiper
+      modules={[FreeMode]}
+      freeMode={{ momentum: true }}
+      grabCursor
+      slidesPerView="auto"
+      spaceBetween={7}
+    >
       {items.map(item => (
-        <MediaThumbnail key={item.id} item={item} shape={shape} size={size} />
+        <SwiperSlide key={item.id} style={{ width: "auto" }}>
+          <MediaThumbnail item={item} shape={shape} size={size} />
+        </SwiperSlide>
       ))}
-    </DragScrollCarousel>
+    </Swiper>
   );
 };
 

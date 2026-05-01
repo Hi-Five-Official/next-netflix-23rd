@@ -1,5 +1,5 @@
 import MediaCardCarousel from "@/components/home/MediaCardCarousel";
-import { getNetflixOriginals } from "@/lib/apis/tmdb";
+import { getNetflixOriginals } from "@/lib/apis/home";
 
 const NetflixOriginalsSection = async () => {
   const data = await getNetflixOriginals();

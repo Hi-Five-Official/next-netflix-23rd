@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { Top10Icon } from "@/assets/icons";
 import { getTmdbImageUrl } from "@/lib/utils/tmdb";
-import { TmdbMedia } from "@/types/tmdb";
+import { TmdbMedia } from "@/types/home";
 
 interface TrendingCarouselProps {
   items: TmdbMedia[];

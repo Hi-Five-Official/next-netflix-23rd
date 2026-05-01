@@ -1,4 +1,4 @@
-import { TmdbMedia } from "@/types/tmdb";
+import { TmdbMedia } from "@/types/home";
 
 type TmdbImageSize = "w185" | "w300" | "w500";
 

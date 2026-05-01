@@ -1,5 +1,5 @@
 import MediaCardCarousel from "@/components/home/MediaCardCarousel";
-import { getAnimationMovies } from "@/lib/apis/tmdb";
+import { getAnimationMovies } from "@/lib/apis/home";
 
 const AnimationMoviesSection = async () => {
   const data = await getAnimationMovies();

@@ -1,4 +1,4 @@
-import { getDetail } from "@/lib/apis/tmdb";
+import { getDetail } from "@/lib/apis/detail";
 
 interface DetailPageProps {
   params: Promise<{ mediaType: string; id: string }>;

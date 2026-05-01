@@ -1,7 +1,7 @@
 import { InfoIcon, PlayIcon, PlusIcon } from "@/assets/icons";
 import Button from "@/components/common/Button";
 import TrendingCarousel from "@/components/home/TrendingCarousel";
-import { getTrendingAll } from "@/lib/apis/tmdb";
+import { getTrendingAll } from "@/lib/apis/home";
 
 const TrendingSection = async () => {
   const data = await getTrendingAll();
