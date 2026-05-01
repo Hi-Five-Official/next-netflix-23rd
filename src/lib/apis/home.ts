@@ -1,3 +1,4 @@
+import { ANIMATION_GENRE_ID, NETFLIX_NETWORK_ID } from "@/constants/tmdb";
 import { tmdbClient } from "@/lib/apis/tmdbClient";
 import {
   MovieListResponse,
@@ -5,9 +6,6 @@ import {
   TrendingAllResponse,
   TvListResponse,
 } from "@/types/home";
-
-const NETFLIX_NETWORK_ID = 213;
-const ANIMATION_GENRE_ID = 16;
 
 export const getTrendingAll = () =>
   tmdbClient<TrendingAllResponse>("/trending/all/day?language=ko-KR");
