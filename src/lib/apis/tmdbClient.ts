@@ -1,5 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+import { API_KEY, BASE_URL } from "@/constants/tmdb";
 
 const defaultHeaders: HeadersInit = {
   Authorization: `Bearer ${API_KEY}`,
@@ -9,6 +8,7 @@ const defaultHeaders: HeadersInit = {
 export const tmdbClient = async <T>(path: string, options?: RequestInit): Promise<T> => {
   try {
     const res = await fetch(`${BASE_URL}${path}`, {
+      next: { revalidate: 3600 },
       ...options,
       headers: {
         ...defaultHeaders,

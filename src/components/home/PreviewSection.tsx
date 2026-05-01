@@ -1,5 +1,5 @@
-import PreviewCarousel from "@/components/home/PreviewCarousel";
-import { getPopularMovies } from "@/lib/apis/tmdb";
+import MediaCardCarousel from "@/components/home/MediaCardCarousel";
+import { getPopularMovies } from "@/lib/apis/home";
 
 const PreviewSection = async () => {
   const data = await getPopularMovies();
@@ -7,7 +7,7 @@ const PreviewSection = async () => {
   return (
     <div className="bg-black">
       <p className="text-heading-1 pb-3 pl-1 text-white">Previews</p>
-      <PreviewCarousel movies={data.results} />
+      <MediaCardCarousel items={data.results} shape="circle" />
     </div>
   );
 };

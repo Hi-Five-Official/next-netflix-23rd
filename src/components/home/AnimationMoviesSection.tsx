@@ -1,10 +1,15 @@
-import MediaCardSection from "@/components/home/MediaCardSection";
-import { getAnimationMovies } from "@/lib/apis/tmdb";
+import MediaCardCarousel from "@/components/home/MediaCardCarousel";
+import { getAnimationMovies } from "@/lib/apis/home";
 
 const AnimationMoviesSection = async () => {
   const data = await getAnimationMovies();
 
-  return <MediaCardSection title="Animation Movies" items={data.results} size="small" />;
+  return (
+    <div className="bg-black">
+      <p className="text-heading-2 pb-3 pl-1 text-white">Animation Movies</p>
+      <MediaCardCarousel items={data.results} size="small" />
+    </div>
+  );
 };
 
 export default AnimationMoviesSection;
