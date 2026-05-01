@@ -16,10 +16,10 @@ const page = () => {
         className="w-full object-cover"
       />
       <div className="bg-gradient-thumbnail absolute inset-0" />
-      <div className="absolute inset-x-0 top-0 z-10">
+      <div className="sticky top-0 z-10">
         <Header />
       </div>
-      <div className="relative flex h-full flex-col items-center justify-center gap-5 px-5">
+      <div className="relative -mt-26 flex h-full flex-col items-center justify-center gap-5 px-5">
         <h1 className="text-center text-[45px] leading-[135%] font-extrabold tracking-[-0.8px] text-white">
           Lost your way?
         </h1>
