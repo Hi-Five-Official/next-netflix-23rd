@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { InfoIcon, PlayIcon, PlusIcon, Top10Icon } from "@/assets/icons";
 import Button from "@/components/common/Button";
-import { getTmdbImageUrl } from "@/lib/utils/tmdb";
+import { getMediaTitle, getMediaType, getTmdbImageUrl } from "@/lib/utils/tmdb";
 import { TmdbMedia } from "@/types/home";
 
 interface TrendingHeroProps {
@@ -25,7 +25,7 @@ const TrendingHero = ({ items }: TrendingHeroProps) => {
   }, [items.length]);
 
   const currentItem = items[current];
-  const mediaType = "title" in currentItem ? "movie" : "tv";
+  const mediaType = getMediaType(currentItem);
 
   return (
     <div className="flex flex-col gap-3.5">
@@ -34,7 +34,7 @@ const TrendingHero = ({ items }: TrendingHeroProps) => {
           <Image
             key={item.id}
             src={getTmdbImageUrl(item.poster_path ?? "", "w500")}
-            alt={("title" in item ? item.title : item.name) || "이미지 없음"}
+            alt={getMediaTitle(item) || "이미지 없음"}
             fill
             sizes="375px"
             className={`object-cover transition-opacity duration-700 ${index === current ? "opacity-100" : "opacity-0"}`}
