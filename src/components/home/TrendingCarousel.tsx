@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { Top10Icon } from "@/assets/icons";
+import { getTmdbImageUrl } from "@/lib/utils/tmdb";
 import { TmdbMedia } from "@/types/tmdb";
 
 interface TrendingCarouselProps {
@@ -26,8 +27,8 @@ const TrendingCarousel = ({ items }: TrendingCarouselProps) => {
         {items.map((item, index) => (
           <Image
             key={item.id}
-            src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/t/p/w500${item.poster_path}`}
-            alt={"title" in item ? item.title : item.name}
+            src={getTmdbImageUrl(item.poster_path ?? "", "w500")}
+            alt={("title" in item ? item.title : item.name) || "이미지 없음"}
             fill
             sizes="375px"
             className={`object-cover transition-opacity duration-700 ${index === current ? "opacity-100" : "opacity-0"}`}
