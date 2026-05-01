@@ -18,6 +18,14 @@
   }
 }
 
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
 @theme {
   /* Black/White */
   --color-black: #000000;
