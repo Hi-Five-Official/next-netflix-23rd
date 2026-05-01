@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Button from "@/components/common/Button";
-import Header from "@/components/home/Header";
+import Header from "@/components/common/Header";
 
 const page = () => {
   return (

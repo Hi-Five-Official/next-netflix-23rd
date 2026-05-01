@@ -1,5 +1,5 @@
+import Header from "@/components/common/Header";
 import AnimationMoviesSection from "@/components/home/AnimationMoviesSection";
-import Header from "@/components/home/Header";
 import KoreanMoviesSection from "@/components/home/KoreanMoviesSection";
 import NetflixOriginalsSection from "@/components/home/NetflixOriginalsSection";
 import PreviewSection from "@/components/home/PreviewSection";
