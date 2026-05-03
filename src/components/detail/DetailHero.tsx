@@ -29,14 +29,6 @@ const DetailHero = async ({ mediaType, id }: DetailHeroProps) => {
       )}
       <div className="bg-gradient-thumbnail absolute inset-0" />
       <BackButton />
-      <div className="absolute bottom-4 left-0 w-full px-4">
-        <h1 className="text-heading-1">{title}</h1>
-        {data.genres.length > 0 && (
-          <p className="text-caption-1 mt-1 text-gray-300">
-            {data.genres.map(g => g.name).join(" · ")}
-          </p>
-        )}
-      </div>
     </div>
   );
 };
