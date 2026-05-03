@@ -1,6 +1,6 @@
 import { TmdbMedia } from "@/types/home";
 
-type TmdbImageSize = "w185" | "w300" | "w500";
+type TmdbImageSize = "w185" | "w300" | "w500" | "w780" | "original";
 
 export const getTmdbImageUrl = (path: string, size: TmdbImageSize) =>
   `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/t/p/${size}${path}`;
