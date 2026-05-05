@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: DetailPageProps): Promise<Met
 
   return {
     title: `${title} | Next Netflix`,
-    description: detail.overview.slice(0, 160),
+    description: detail.overview?.slice(0, 160) ?? "",
     openGraph: {
       title,
       description: detail.overview,
