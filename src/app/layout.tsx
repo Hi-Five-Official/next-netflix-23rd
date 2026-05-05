@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import BottomNavbar from "@/components/common/BottomNavbar";
 import HomeIndicator from "@/components/common/HomeIndicator";
+import QueryProvider from "@/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: "Next Netflix",
@@ -28,13 +29,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body className="flex justify-center bg-white">
-        <div className="relative min-h-dvh w-93.75 bg-black">
-          {children}
-          <div className="fixed bottom-0 z-10 w-[inherit]">
-            <BottomNavbar />
-            <HomeIndicator />
+        <QueryProvider>
+          <div className="relative min-h-dvh w-93.75 bg-black">
+            {children}
+            <div className="fixed bottom-0 z-10 w-[inherit]">
+              <BottomNavbar />
+              <HomeIndicator />
+            </div>
           </div>
-        </div>
+        </QueryProvider>
       </body>
     </html>
   );
