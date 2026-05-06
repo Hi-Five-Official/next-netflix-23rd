@@ -9,6 +9,7 @@ import { TmdbSearchResult } from "@/types/search";
 
 interface SearchMediaItemProps {
   item: TmdbMedia | TmdbSearchResult;
+  priority?: boolean;
 }
 
 const getTitle = (item: TmdbMedia | TmdbSearchResult) => {
@@ -25,7 +26,10 @@ const getImagePath = (item: TmdbMedia | TmdbSearchResult) => {
   return item.poster_path;
 };
 
-const SearchMediaItem = memo(function SearchMediaItem({ item }: SearchMediaItemProps) {
+const SearchMediaItem = memo(function SearchMediaItem({
+  item,
+  priority = false,
+}: SearchMediaItemProps) {
   const title = getTitle(item);
   const imagePath = getImagePath(item);
 
@@ -44,6 +48,7 @@ const SearchMediaItem = memo(function SearchMediaItem({ item }: SearchMediaItemP
           alt={title}
           fill
           sizes="146px"
+          priority={priority}
           className="object-cover"
         />
       </div>

@@ -36,8 +36,12 @@ const SearchResultList = memo(function SearchResultList(props: SearchResultListP
   return (
     <section>
       <div className="flex flex-col gap-1">
-        {results.map(item => (
-          <SearchResultItem key={`${item.media_type}-${item.id}`} item={item} />
+        {results.map((item, index) => (
+          <SearchResultItem
+            key={`${item.media_type}-${item.id}`}
+            item={item}
+            priority={index === 0}
+          />
         ))}
       </div>
     </section>
