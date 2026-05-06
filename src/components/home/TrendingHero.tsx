@@ -36,7 +36,7 @@ const TrendingHero = ({ items }: TrendingHeroProps) => {
       }
     };
 
-    start();
+    if (document.visibilityState === "visible") start();
     document.addEventListener("visibilitychange", handleVisibility);
     return () => {
       clearInterval(timer);
