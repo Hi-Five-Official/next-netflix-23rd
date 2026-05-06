@@ -1,5 +1,6 @@
 "use client";
 
+import type { UIEvent } from "react";
 import { useCallback, useState } from "react";
 
 import SearchInput from "@/components/search/SearchInput";
@@ -52,28 +53,40 @@ export default function SearchPage() {
       }) ?? [],
   );
 
-  const handleScroll = useCallback(() => {
-    if (hasKeyword) {
-      if (hasNextSearchPage && !isFetchingNextSearchPage && !isSearchLoading) {
-        fetchNextSearchPage();
-      }
-      return;
-    }
+  const handleScroll = useCallback(
+    (event: UIEvent<HTMLDivElement>) => {
+      const target = event.currentTarget;
+      const isBottom = target.scrollTop + target.clientHeight >= target.scrollHeight;
+      // scrollTop: 현재 위에서부터 얼마나 스크롤 되었는지. clientHeight: 화면에 보이는 영역의 높이. scrollHeight: 전체 스크롤 가능한 영역의 높이.
 
-    if (hasNextTopSearchPage && !isFetchingNextTopSearchPage && !isTopSearchLoading) {
-      fetchNextTopSearchPage();
-    }
-  }, [
-    hasKeyword,
-    hasNextSearchPage,
-    isFetchingNextSearchPage,
-    isSearchLoading,
-    fetchNextSearchPage,
-    hasNextTopSearchPage,
-    isFetchingNextTopSearchPage,
-    isTopSearchLoading,
-    fetchNextTopSearchPage,
-  ]);
+      if (!isBottom) {
+        return;
+      }
+      // 스크롤이 바닥에 닿았을 때  true 반환
+
+      if (hasKeyword) {
+        if (hasNextSearchPage && !isFetchingNextSearchPage && !isSearchLoading) {
+          fetchNextSearchPage();
+        }
+        return;
+      }
+
+      if (hasNextTopSearchPage && !isFetchingNextTopSearchPage && !isTopSearchLoading) {
+        fetchNextTopSearchPage();
+      }
+    },
+    [
+      hasKeyword,
+      hasNextSearchPage,
+      isFetchingNextSearchPage,
+      isSearchLoading,
+      fetchNextSearchPage,
+      hasNextTopSearchPage,
+      isFetchingNextTopSearchPage,
+      isTopSearchLoading,
+      fetchNextTopSearchPage,
+    ],
+  );
 
   return (
     <div className="flex h-screen flex-col bg-black">

@@ -8,7 +8,7 @@ interface SearchInputProps {
   onClear: () => void;
 }
 
-export default function SearchInput({ value, onChange, onClear }: SearchInputProps) {
+const SearchInput = ({ value, onChange, onClear }: SearchInputProps) => {
   return (
     <div className="flex h-13 w-full items-center justify-between gap-[21px] bg-gray-800 px-5">
       <div className="flex w-full items-center gap-2">
@@ -27,4 +27,6 @@ export default function SearchInput({ value, onChange, onClear }: SearchInputPro
       </div>
     </div>
   );
-}
+};
+
+export default SearchInput;
