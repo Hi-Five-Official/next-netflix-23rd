@@ -16,7 +16,7 @@ const DetailHero = ({ data }: DetailHeroProps) => {
     <div className="relative h-103.75 w-full">
       {imagePath && (
         <Image
-          src={getTmdbImageUrl(imagePath, "w500")}
+          src={getTmdbImageUrl(imagePath, "w780")}
           alt={title}
           fill
           sizes="375px"
