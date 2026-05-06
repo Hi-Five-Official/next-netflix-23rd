@@ -1,16 +1,22 @@
 "use client";
 
 import type { UIEvent } from "react";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import SearchInput from "@/components/search/SearchInput";
 import SearchResultList from "@/components/search/SearchResultList";
+import { useDebounce } from "@/lib/hooks/useDebounce";
 import { useSearchMulti, useTopSearches } from "@/lib/hooks/useSearchMulti";
+
+function removeDuplicateItems<T extends { id: number; media_type: string }>(items: T[]): T[] {
+  return Array.from(new Map(items.map(item => [`${item.media_type}-${item.id}`, item])).values());
+}
 
 export default function SearchPage() {
   const [keyword, setKeyword] = useState("");
 
-  const trimmedKeyword = keyword.trim();
+  const debouncedKeyword = useDebounce(keyword, 300);
+  const trimmedKeyword = debouncedKeyword.trim();
   const hasKeyword = trimmedKeyword.length > 0;
 
   const {
@@ -29,40 +35,33 @@ export default function SearchPage() {
     isFetchingNextPage: isFetchingNextTopSearchPage,
   } = useTopSearches();
 
-  const removeDuplicateItems = <T extends { id: number; media_type: string }>(items: T[]) => {
-    return Array.from(new Map(items.map(item => [`${item.media_type}-${item.id}`, item])).values());
-  };
-  // 중복된 항목 제거. 뒤에 나온 데이터가 앞의 데이터를 덮어씀
-
-  const topSearches = removeDuplicateItems(
-    topSearchData?.pages
-      .flatMap(page => page.results)
-      .filter(item => item.media_type === "movie" || item.media_type === "tv")
-      .filter(item => item.poster_path) ?? [],
+  const topSearches = useMemo(
+    () =>
+      removeDuplicateItems(
+        topSearchData?.pages
+          .flatMap(page => page.results)
+          .filter(item => item.media_type === "movie" || item.media_type === "tv")
+          .filter(item => item.poster_path) ?? [],
+      ),
+    [topSearchData],
   );
 
-  const searchResults = removeDuplicateItems(
-    searchData?.pages
-      .flatMap(page => page.results)
-      .filter(item => {
-        if (item.media_type === "person") {
-          return false;
-        }
-
-        return item.poster_path;
-      }) ?? [],
+  const searchResults = useMemo(
+    () =>
+      removeDuplicateItems(
+        searchData?.pages
+          .flatMap(page => page.results)
+          .filter(item => item.media_type !== "person" && item.poster_path) ?? [],
+      ),
+    [searchData],
   );
 
   const handleScroll = useCallback(
     (event: UIEvent<HTMLDivElement>) => {
       const target = event.currentTarget;
       const isBottom = target.scrollTop + target.clientHeight >= target.scrollHeight;
-      // scrollTop: 현재 위에서부터 얼마나 스크롤 되었는지. clientHeight: 화면에 보이는 영역의 높이. scrollHeight: 전체 스크롤 가능한 영역의 높이.
 
-      if (!isBottom) {
-        return;
-      }
-      // 스크롤이 바닥에 닿았을 때  true 반환
+      if (!isBottom) return;
 
       if (hasKeyword) {
         if (hasNextSearchPage && !isFetchingNextSearchPage && !isSearchLoading) {

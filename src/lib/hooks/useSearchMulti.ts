@@ -1,24 +1,22 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 
 import { getTrendingAll } from "@/lib/apis/home";
 import { searchMulti } from "@/lib/apis/search";
 
+const STALE_TIME = 1000 * 60 * 5;
+
 export const useSearchMulti = (query: string) => {
-  const trimmedQuery = query.trim();
-
   return useInfiniteQuery({
-    queryKey: ["search", trimmedQuery],
-    queryFn: ({ pageParam }) => searchMulti(trimmedQuery, pageParam),
-
+    queryKey: ["search", query],
+    queryFn: ({ pageParam }) => searchMulti(query, pageParam),
     initialPageParam: 1,
     getNextPageParam: lastPage => {
-      if (lastPage.page >= lastPage.total_pages) {
-        return undefined;
-      }
+      if (lastPage.page >= lastPage.total_pages) return undefined;
       return lastPage.page + 1;
     },
-
-    enabled: trimmedQuery.length > 0,
+    enabled: query.length > 0,
+    staleTime: STALE_TIME,
+    placeholderData: keepPreviousData,
   });
 };
 
@@ -28,11 +26,9 @@ export const useTopSearches = () => {
     queryFn: ({ pageParam }) => getTrendingAll(Number(pageParam)),
     initialPageParam: 1,
     getNextPageParam: lastPage => {
-      if (lastPage.page >= lastPage.total_pages) {
-        return undefined;
-      }
+      if (lastPage.page >= lastPage.total_pages) return undefined;
       return lastPage.page + 1;
     },
+    staleTime: STALE_TIME,
   });
 };
-// 검색어가 없으면 Top searches 호출, 검색어가 있을 때만 API 호출

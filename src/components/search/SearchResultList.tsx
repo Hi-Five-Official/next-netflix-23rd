@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import { TmdbMedia } from "@/types/home";
 import { TmdbSearchResult } from "@/types/search";
 
@@ -15,8 +17,8 @@ type SearchResultListProps =
       isLoading?: boolean;
     };
 
-export default function SearchResultList(props: SearchResultListProps) {
-  const { variant, results, isLoading = false } = props;
+const SearchResultList = memo(function SearchResultList(props: SearchResultListProps) {
+  const { results, isLoading = false } = props;
 
   if (isLoading) {
     return (
@@ -28,7 +30,7 @@ export default function SearchResultList(props: SearchResultListProps) {
 
   if (results.length === 0) {
     return (
-      <section className="flex min-h-[300px] items-center justify-center px-6 text-center">
+      <section className="flex min-h-75 items-center justify-center px-6 text-center">
         <p className="text-sm text-white">검색 결과가 없습니다.</p>
       </section>
     );
@@ -43,4 +45,6 @@ export default function SearchResultList(props: SearchResultListProps) {
       </div>
     </section>
   );
-}
+});
+
+export default SearchResultList;
