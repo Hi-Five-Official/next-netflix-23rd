@@ -1,12 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Suspense, useRef, useState } from "react";
 
-import SearchContent from "@/components/search/SearchContent";
 import SearchInput from "@/components/search/SearchInput";
 import SearchResultSkeleton from "@/components/search/SearchResultSkeleton";
-import TopSearchContent from "@/components/search/TopSearchContent";
 import { useDebounce } from "@/lib/hooks/useDebounce";
+
+const TopSearchContent = dynamic(() => import("@/components/search/TopSearchContent"), {
+  ssr: false,
+});
+const SearchContent = dynamic(() => import("@/components/search/SearchContent"), { ssr: false });
 
 const Page = () => {
   const [keyword, setKeyword] = useState("");

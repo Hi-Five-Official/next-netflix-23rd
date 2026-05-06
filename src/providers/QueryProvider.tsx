@@ -1,8 +1,13 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import dynamic from "next/dynamic";
 import { useState } from "react";
+
+const ReactQueryDevtools = dynamic(
+  () => import("@tanstack/react-query-devtools").then(mod => ({ default: mod.ReactQueryDevtools })),
+  { ssr: false },
+);
 
 import { QUERY_GC_TIME, QUERY_STALE_TIME } from "@/lib/constants/query";
 
