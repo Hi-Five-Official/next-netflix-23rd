@@ -67,7 +67,11 @@ const Page = () => {
       fetchNextTopSearchPage();
   };
 
-  useIntersectionObserver(sentinelRef, handleLoadMore, scrollContainerRef);
+  // 새 페이지가 도착할 때마다 observer를 재연결해서
+  // sentinel이 아직 뷰포트 안에 있으면 다음 페이지를 연속으로 요청한다
+  const reconnectOn = hasKeyword ? searchData?.pages.length : topSearchData?.pages.length;
+
+  useIntersectionObserver(sentinelRef, handleLoadMore, scrollContainerRef, reconnectOn);
 
   return (
     <div className="flex h-screen flex-col bg-black">
@@ -79,7 +83,7 @@ const Page = () => {
       </div>
       <div ref={scrollContainerRef} className="min-h-0 flex-1 overflow-y-auto bg-black pb-24">
         {!hasKeyword && (
-          <div>
+          <div className={isTopSearchLoading ? "h-full" : undefined}>
             <SearchResultList variant="top" results={topSearches} isLoading={isTopSearchLoading} />
             {isFetchingNextTopSearchPage && (
               <div className="text-body-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
@@ -87,7 +91,7 @@ const Page = () => {
           </div>
         )}
         {hasKeyword && (
-          <div>
+          <div className={isSearchLoading ? "h-full" : undefined}>
             <SearchResultList
               variant="result"
               results={searchResults}

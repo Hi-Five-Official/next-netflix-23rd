@@ -7,10 +7,10 @@ const SearchResultSkeletonItem = () => (
   </div>
 );
 
-const SearchResultSkeleton = ({ count = 8 }: { count?: number }) => (
-  <section>
+const SearchResultSkeleton = () => (
+  <section className="h-full overflow-hidden">
     <div className="flex flex-col gap-1">
-      {Array.from({ length: count }, (_, i) => (
+      {Array.from({ length: 15 }, (_, i) => (
         <SearchResultSkeletonItem key={i} />
       ))}
     </div>

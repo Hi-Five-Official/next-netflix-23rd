@@ -4,6 +4,7 @@ export const useIntersectionObserver = (
   targetRef: RefObject<Element | null>,
   onIntersect: () => void,
   rootRef?: RefObject<Element | null>,
+  reconnectOn?: unknown,
 ) => {
   const callbackRef = useRef(onIntersect);
 
@@ -24,5 +25,7 @@ export const useIntersectionObserver = (
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [targetRef, rootRef]);
+    // reconnectOn이 바뀌면(새 페이지 도착) observer를 재연결해서
+    // sentinel이 아직 뷰포트 안에 있으면 다시 발동되도록 한다
+  }, [targetRef, rootRef, reconnectOn]);
 };
