@@ -4,6 +4,7 @@ import { TmdbMedia } from "@/types/home";
 import { TmdbSearchResult } from "@/types/search";
 
 import SearchResultItem from "./SearchResultItem";
+import SearchResultSkeleton from "./SearchResultSkeleton";
 
 type SearchResultListProps =
   | {
@@ -21,11 +22,7 @@ const SearchResultList = memo(function SearchResultList(props: SearchResultListP
   const { results, isLoading = false } = props;
 
   if (isLoading) {
-    return (
-      <section className="px-6 pt-4">
-        <p className="text-body-1 text-gray-500">불러오는 중...</p>
-      </section>
-    );
+    return <SearchResultSkeleton />;
   }
 
   if (results.length === 0) {
