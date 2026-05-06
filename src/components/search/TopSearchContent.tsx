@@ -5,7 +5,7 @@ import { useMemo, useRef } from "react";
 
 import SearchResultList from "@/components/search/SearchResultList";
 import { getTrendingAll } from "@/lib/apis/home";
-import { QUERY_GC_TIME, TOP_SEARCHES_STALE_TIME } from "@/lib/constants/query";
+import { QUERY_GC_TIME, QUERY_KEYS, TOP_SEARCHES_STALE_TIME } from "@/lib/constants/query";
 import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver";
 
 type Props = { scrollContainerRef: React.RefObject<HTMLDivElement | null> };
@@ -15,7 +15,7 @@ const removeDuplicateItems = <T extends { id: number; media_type: string }>(item
 
 const TopSearchContent = ({ scrollContainerRef }: Props) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
-    queryKey: ["top-searches"],
+    queryKey: QUERY_KEYS.topSearches,
     queryFn: ({ pageParam }) => getTrendingAll(Number(pageParam)),
     initialPageParam: 1,
     getNextPageParam: lastPage => {

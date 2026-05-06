@@ -5,7 +5,7 @@ import { useMemo, useRef } from "react";
 
 import SearchResultList from "@/components/search/SearchResultList";
 import { searchMulti } from "@/lib/apis/search";
-import { QUERY_GC_TIME, QUERY_STALE_TIME } from "@/lib/constants/query";
+import { QUERY_GC_TIME, QUERY_KEYS, QUERY_STALE_TIME } from "@/lib/constants/query";
 import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver";
 
 type Props = {
@@ -18,7 +18,7 @@ const removeDuplicateItems = <T extends { id: number; media_type: string }>(item
 
 const SearchContent = ({ keyword, scrollContainerRef }: Props) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
-    queryKey: ["search", keyword],
+    queryKey: QUERY_KEYS.search(keyword),
     queryFn: ({ pageParam }) => searchMulti(keyword, pageParam),
     initialPageParam: 1,
     getNextPageParam: lastPage => {
