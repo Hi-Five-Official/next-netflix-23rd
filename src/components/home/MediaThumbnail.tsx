@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { memo } from "react";
 
 import { getMediaTitle, getMediaType, getTmdbImageUrl } from "@/lib/utils/tmdb";
 import { TmdbMedia } from "@/types/home";
@@ -10,7 +11,11 @@ interface MediaThumbnailProps {
   size?: "small" | "large";
 }
 
-const MediaThumbnail = ({ item, shape = "rect", size = "small" }: MediaThumbnailProps) => {
+const MediaThumbnail = memo(function MediaThumbnail({
+  item,
+  shape = "rect",
+  size = "small",
+}: MediaThumbnailProps) {
   const title = getMediaTitle(item);
   const mediaType = getMediaType(item);
 
@@ -25,7 +30,7 @@ const MediaThumbnail = ({ item, shape = "rect", size = "small" }: MediaThumbnail
             alt={title}
             fill
             sizes="102px"
-            className="pointer-events-none object-cover"
+            className="object-cover"
           />
         </div>
       </Link>
@@ -33,6 +38,7 @@ const MediaThumbnail = ({ item, shape = "rect", size = "small" }: MediaThumbnail
   }
 
   const cardSize = size === "small" ? "w-25.75 h-44.25" : "w-38.5 h-62.75";
+  const imageSizes = size === "small" ? "103px" : "154px";
 
   return (
     <Link href={href}>
@@ -41,12 +47,12 @@ const MediaThumbnail = ({ item, shape = "rect", size = "small" }: MediaThumbnail
           src={getTmdbImageUrl(item.poster_path ?? "", "w300")}
           alt={title}
           fill
-          sizes="120px"
-          className="pointer-events-none object-cover"
+          sizes={imageSizes}
+          className="object-cover"
         />
       </div>
     </Link>
   );
-};
+});
 
 export default MediaThumbnail;

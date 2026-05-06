@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import SearchInput from "@/components/search/SearchInput";
 import SearchResultList from "@/components/search/SearchResultList";
@@ -58,24 +58,14 @@ const Page = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  const handleLoadMore = useCallback(() => {
+  const handleLoadMore = () => {
     if (hasKeyword) {
       if (hasNextSearchPage && !isFetchingNextSearchPage && !isSearchLoading) fetchNextSearchPage();
       return;
     }
     if (hasNextTopSearchPage && !isFetchingNextTopSearchPage && !isTopSearchLoading)
       fetchNextTopSearchPage();
-  }, [
-    hasKeyword,
-    hasNextSearchPage,
-    isFetchingNextSearchPage,
-    isSearchLoading,
-    fetchNextSearchPage,
-    hasNextTopSearchPage,
-    isFetchingNextTopSearchPage,
-    isTopSearchLoading,
-    fetchNextTopSearchPage,
-  ]);
+  };
 
   useIntersectionObserver(sentinelRef, handleLoadMore, scrollContainerRef);
 

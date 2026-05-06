@@ -28,6 +28,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
+      <head>
+        <link rel="preconnect" href="https://image.tmdb.org" />
+      </head>
       <body className="flex justify-center bg-white">
         <QueryProvider>
           <div className="relative min-h-dvh w-93.75 bg-black">

@@ -18,10 +18,30 @@ const TrendingHero = ({ items }: TrendingHeroProps) => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent(prev => (prev + 1) % items.length);
-    }, 4000);
-    return () => clearInterval(timer);
+    if (items.length <= 1) return;
+
+    let timer: ReturnType<typeof setInterval>;
+
+    const start = () => {
+      timer = setInterval(() => {
+        setCurrent(prev => (prev + 1) % items.length);
+      }, 4000);
+    };
+
+    const handleVisibility = () => {
+      if (document.visibilityState === "hidden") {
+        clearInterval(timer);
+      } else {
+        start();
+      }
+    };
+
+    start();
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
   }, [items.length]);
 
   const currentItem = items[current];

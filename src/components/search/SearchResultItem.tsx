@@ -3,6 +3,7 @@ import Link from "next/link";
 import { memo } from "react";
 
 import { PlayCircleIcon } from "@/assets/icons";
+import { getTmdbImageUrl } from "@/lib/utils/tmdb";
 import { TmdbMedia } from "@/types/home";
 import { TmdbSearchResult } from "@/types/search";
 
@@ -39,7 +40,7 @@ const SearchMediaItem = memo(function SearchMediaItem({ item }: SearchMediaItemP
     >
       <div className="relative h-full w-36.5 shrink-0">
         <Image
-          src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/t/p/w500${imagePath}`}
+          src={getTmdbImageUrl(imagePath, "w500")}
           alt={title}
           fill
           sizes="146px"
