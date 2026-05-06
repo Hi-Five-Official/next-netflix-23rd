@@ -1,29 +1,21 @@
 import { memo } from "react";
 
+import SearchResultItem from "@/components/search/SearchResultItem";
 import { TmdbMedia } from "@/types/home";
 import { TmdbSearchResult } from "@/types/search";
-
-import SearchResultItem from "./SearchResultItem";
-import SearchResultSkeleton from "./SearchResultSkeleton";
 
 type SearchResultListProps =
   | {
       variant: "top";
       results: TmdbMedia[];
-      isLoading?: boolean;
     }
   | {
       variant: "result";
       results: TmdbSearchResult[];
-      isLoading?: boolean;
     };
 
 const SearchResultList = memo(function SearchResultList(props: SearchResultListProps) {
-  const { results, isLoading = false } = props;
-
-  if (isLoading) {
-    return <SearchResultSkeleton />;
-  }
+  const { results } = props;
 
   if (results.length === 0) {
     return (

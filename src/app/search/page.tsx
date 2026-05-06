@@ -1,77 +1,20 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 
+import SearchContent from "@/components/search/SearchContent";
 import SearchInput from "@/components/search/SearchInput";
-import SearchResultList from "@/components/search/SearchResultList";
+import SearchResultSkeleton from "@/components/search/SearchResultSkeleton";
+import TopSearchContent from "@/components/search/TopSearchContent";
 import { useDebounce } from "@/lib/hooks/useDebounce";
-import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver";
-import { useSearchMulti, useTopSearches } from "@/lib/hooks/useSearchMulti";
-
-const removeDuplicateItems = <T extends { id: number; media_type: string }>(items: T[]): T[] =>
-  Array.from(new Map(items.map(item => [`${item.media_type}-${item.id}`, item])).values());
 
 const Page = () => {
   const [keyword, setKeyword] = useState("");
-
   const debouncedKeyword = useDebounce(keyword, 300);
   const trimmedKeyword = debouncedKeyword.trim();
   const hasKeyword = trimmedKeyword.length > 0;
 
-  const {
-    data: searchData,
-    isLoading: isSearchLoading,
-    fetchNextPage: fetchNextSearchPage,
-    hasNextPage: hasNextSearchPage,
-    isFetchingNextPage: isFetchingNextSearchPage,
-  } = useSearchMulti(trimmedKeyword);
-
-  const {
-    data: topSearchData,
-    isLoading: isTopSearchLoading,
-    fetchNextPage: fetchNextTopSearchPage,
-    hasNextPage: hasNextTopSearchPage,
-    isFetchingNextPage: isFetchingNextTopSearchPage,
-  } = useTopSearches();
-
-  const topSearches = useMemo(
-    () =>
-      removeDuplicateItems(
-        topSearchData?.pages
-          .flatMap(page => page.results)
-          .filter(item => item.media_type === "movie" || item.media_type === "tv")
-          .filter(item => item.poster_path) ?? [],
-      ),
-    [topSearchData],
-  );
-
-  const searchResults = useMemo(
-    () =>
-      removeDuplicateItems(
-        searchData?.pages
-          .flatMap(page => page.results)
-          .filter(item => item.media_type !== "person" && item.poster_path) ?? [],
-      ),
-    [searchData],
-  );
-
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const sentinelRef = useRef<HTMLDivElement>(null);
-
-  const handleLoadMore = () => {
-    if (hasKeyword) {
-      if (hasNextSearchPage && !isFetchingNextSearchPage && !isSearchLoading) fetchNextSearchPage();
-      return;
-    }
-    if (hasNextTopSearchPage && !isFetchingNextTopSearchPage && !isTopSearchLoading)
-      fetchNextTopSearchPage();
-  };
-
-  // 새 페이지가 도착할 때마다 observer를 재연결해서
-  // sentinel이 아직 뷰포트 안에 있으면 다음 페이지를 연속으로 요청한다
-  const reconnectOn = hasKeyword ? searchData?.pages.length : topSearchData?.pages.length;
-
-  useIntersectionObserver(sentinelRef, handleLoadMore, scrollContainerRef, reconnectOn);
 
   return (
     <div className="flex h-screen flex-col bg-black">
@@ -82,27 +25,15 @@ const Page = () => {
         {hasKeyword ? "Search Results" : "Top Searches"}
       </div>
       <div ref={scrollContainerRef} className="min-h-0 flex-1 overflow-y-auto bg-black pb-24">
-        {!hasKeyword && (
-          <div className={isTopSearchLoading ? "h-full" : undefined}>
-            <SearchResultList variant="top" results={topSearches} isLoading={isTopSearchLoading} />
-            {isFetchingNextTopSearchPage && (
-              <div className="text-body-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
-            )}
-          </div>
+        {hasKeyword ? (
+          <Suspense fallback={<SearchResultSkeleton />}>
+            <SearchContent keyword={trimmedKeyword} scrollContainerRef={scrollContainerRef} />
+          </Suspense>
+        ) : (
+          <Suspense fallback={<SearchResultSkeleton />}>
+            <TopSearchContent scrollContainerRef={scrollContainerRef} />
+          </Suspense>
         )}
-        {hasKeyword && (
-          <div className={isSearchLoading ? "h-full" : undefined}>
-            <SearchResultList
-              variant="result"
-              results={searchResults}
-              isLoading={isSearchLoading}
-            />
-            {isFetchingNextSearchPage && (
-              <div className="text-body-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
-            )}
-          </div>
-        )}
-        <div ref={sentinelRef} />
       </div>
     </div>
   );
