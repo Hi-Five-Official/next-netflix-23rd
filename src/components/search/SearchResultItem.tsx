@@ -2,29 +2,28 @@ import Image from "next/image";
 import Link from "next/link";
 
 import PlayIcon from "@/assets/icons/icon_play_circle_fill.svg";
+import { TmdbMedia } from "@/types/home";
 import { TmdbSearchResult } from "@/types/search";
 
-interface SearchResultItemProps {
-  item: TmdbSearchResult;
+interface SearchMediaItemProps {
+  item: TmdbMedia | TmdbSearchResult;
 }
 
-const getTitle = (item: TmdbSearchResult) => {
+const getTitle = (item: TmdbMedia | TmdbSearchResult) => {
   if (item.media_type === "movie") {
     return item.title;
   }
-
   return item.name;
 };
 
-const getImagePath = (item: TmdbSearchResult) => {
+const getImagePath = (item: TmdbMedia | TmdbSearchResult) => {
   if (item.media_type === "person") {
     return item.profile_path;
   }
-
   return item.poster_path;
 };
 
-export default function SearchResultItem({ item }: SearchResultItemProps) {
+export default function SearchMediaItem({ item }: SearchMediaItemProps) {
   const title = getTitle(item);
   const imagePath = getImagePath(item);
 

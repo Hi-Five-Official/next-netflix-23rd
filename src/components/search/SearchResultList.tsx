@@ -2,7 +2,6 @@ import { TmdbMedia } from "@/types/home";
 import { TmdbSearchResult } from "@/types/search";
 
 import SearchResultItem from "./SearchResultItem";
-import TopSearchItem from "./TopSearchItem";
 
 type SearchResultListProps =
   | {
@@ -23,18 +22,6 @@ export default function SearchResultList(props: SearchResultListProps) {
     return (
       <section className="px-6 pt-4">
         <p className="text-sm text-gray-500">불러오는 중...</p>
-      </section>
-    );
-  }
-
-  if (variant === "top") {
-    return (
-      <section>
-        <div className="flex flex-col gap-1">
-          {results.map(item => (
-            <TopSearchItem key={`${item.media_type}-${item.id}`} item={item} />
-          ))}
-        </div>
       </section>
     );
   }
