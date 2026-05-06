@@ -1,6 +1,6 @@
 "use client";
-import SearchIcon from "@/assets/icons/icon_search_thin.svg";
-import ClearIcon from "@/assets/icons/icon_x_thin.svg";
+
+import { SearchIcon, XIcon } from "@/assets/icons";
 
 interface SearchInputProps {
   value: string;
@@ -22,7 +22,7 @@ export default function SearchInput({ value, onChange, onClear }: SearchInputPro
       </div>
       <div className="flex items-center">
         <button onClick={onClear} type="button">
-          <ClearIcon className="size-4 text-gray-600" />
+          <XIcon className="size-4 text-gray-600" />
         </button>
       </div>
     </div>

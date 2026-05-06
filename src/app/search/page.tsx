@@ -4,7 +4,7 @@ import { useCallback, useState } from "react";
 
 import SearchInput from "@/components/search/SearchInput";
 import SearchResultList from "@/components/search/SearchResultList";
-import { useSearchMulti, useTopSearches } from "@/hooks/useSearchMulti";
+import { useSearchMulti, useTopSearches } from "@/lib/hooks/useSearchMulti";
 
 export default function SearchPage() {
   const [keyword, setKeyword] = useState("");

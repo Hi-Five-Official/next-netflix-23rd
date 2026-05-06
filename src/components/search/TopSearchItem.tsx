@@ -8,8 +8,6 @@ interface TopSearchItemProps {
   item: TmdbMedia;
 }
 
-const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
-
 const getTitle = (item: TmdbMedia) => {
   if (item.media_type === "movie") {
     return item.title;
@@ -37,7 +35,7 @@ export default function TopSearchItem({ item }: TopSearchItemProps) {
     >
       <div className="rounded-2px relative h-full w-[146px] shrink-0">
         <Image
-          src={`${TMDB_IMAGE_BASE_URL}${imagePath}`}
+          src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/t/p/w500${imagePath}`}
           alt={title}
           fill
           sizes="160px"
