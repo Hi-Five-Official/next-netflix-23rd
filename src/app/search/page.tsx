@@ -9,8 +9,12 @@ import { useDebounce } from "@/lib/hooks/useDebounce";
 
 const TopSearchContent = dynamic(() => import("@/components/search/TopSearchContent"), {
   ssr: false,
+  loading: () => <SearchResultSkeleton />,
 });
-const SearchContent = dynamic(() => import("@/components/search/SearchContent"), { ssr: false });
+const SearchContent = dynamic(() => import("@/components/search/SearchContent"), {
+  ssr: false,
+  loading: () => <SearchResultSkeleton />,
+});
 
 const Page = () => {
   const [keyword, setKeyword] = useState("");
@@ -31,7 +35,11 @@ const Page = () => {
       <div ref={scrollContainerRef} className="min-h-0 flex-1 overflow-y-auto bg-black pb-24">
         {hasKeyword ? (
           <Suspense fallback={<SearchResultSkeleton />}>
-            <SearchContent keyword={trimmedKeyword} scrollContainerRef={scrollContainerRef} />
+            <SearchContent
+              key={trimmedKeyword}
+              keyword={trimmedKeyword}
+              scrollContainerRef={scrollContainerRef}
+            />
           </Suspense>
         ) : (
           <Suspense fallback={<SearchResultSkeleton />}>
