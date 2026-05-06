@@ -2,8 +2,7 @@ import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 
 import { getTrendingAll } from "@/lib/apis/home";
 import { searchMulti } from "@/lib/apis/search";
-
-const STALE_TIME = 1000 * 60 * 5;
+import { QUERY_STALE_TIME } from "@/lib/constants/query";
 
 export const useSearchMulti = (query: string) => {
   return useInfiniteQuery({
