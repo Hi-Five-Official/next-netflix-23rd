@@ -7,11 +7,9 @@ import SearchResultList from "@/components/search/SearchResultList";
 import { getTrendingAll } from "@/lib/apis/home";
 import { QUERY_GC_TIME, QUERY_KEYS, TOP_SEARCHES_STALE_TIME } from "@/lib/constants/query";
 import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver";
+import { removeDuplicateItems } from "@/lib/utils/media";
 
 type Props = { scrollContainerRef: React.RefObject<HTMLDivElement | null> };
-
-const removeDuplicateItems = <T extends { id: number; media_type: string }>(items: T[]): T[] =>
-  Array.from(new Map(items.map(item => [`${item.media_type}-${item.id}`, item])).values());
 
 const TopSearchContent = ({ scrollContainerRef }: Props) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
