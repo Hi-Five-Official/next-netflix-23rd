@@ -44,7 +44,7 @@ const SearchMediaItem = memo(function SearchMediaItem({
     >
       <div className="relative h-full w-36.5 shrink-0">
         <Image
-          src={getTmdbImageUrl(imagePath, "w500")}
+          src={getTmdbImageUrl(imagePath, "w185")}
           alt={title}
           fill
           sizes="146px"
