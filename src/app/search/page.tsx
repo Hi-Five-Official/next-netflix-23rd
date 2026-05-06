@@ -76,7 +76,7 @@ export default function SearchPage() {
   ]);
 
   return (
-    <div onScroll={handleScroll} className="h-screen overflow-y-auto bg-black pb-24">
+    <div className="flex h-screen flex-col bg-black">
       <div className="pt-11">
         <SearchInput value={keyword} onChange={setKeyword} onClear={() => setKeyword("")} />
       </div>
@@ -84,25 +84,31 @@ export default function SearchPage() {
         {hasKeyword ? "Search Results" : "Top Searches"}
       </div>
 
-      {!hasKeyword && (
-        <div>
-          <SearchResultList variant="top" results={topSearches} isLoading={isTopSearchLoading} />
+      <div onScroll={handleScroll} className="min-h-0 flex-1 overflow-y-auto bg-black pb-24">
+        {!hasKeyword && (
+          <div>
+            <SearchResultList variant="top" results={topSearches} isLoading={isTopSearchLoading} />
 
-          {isFetchingNextTopSearchPage && (
-            <div className="text-heading-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
-          )}
-        </div>
-      )}
+            {isFetchingNextTopSearchPage && (
+              <div className="text-heading-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
+            )}
+          </div>
+        )}
 
-      {hasKeyword && (
-        <div>
-          <SearchResultList variant="result" results={searchResults} isLoading={isSearchLoading} />
+        {hasKeyword && (
+          <div>
+            <SearchResultList
+              variant="result"
+              results={searchResults}
+              isLoading={isSearchLoading}
+            />
 
-          {isFetchingNextSearchPage && (
-            <div className="text-heading-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
-          )}
-        </div>
-      )}
+            {isFetchingNextSearchPage && (
+              <div className="text-heading-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -47,10 +47,9 @@ export default function SearchResultItem({ item }: SearchResultItemProps) {
         />
       </div>
 
-      <div className="flex w-[229px] items-center justify-between py-[23px] pr-4 pl-[19px] hover:bg-gray-900">
-        <p className="text-body-2 text-white">{title}</p>
-
-        <PlayIcon className="size-7 text-white" />
+      <div className="flex min-w-0 flex-1 items-center justify-between py-[23px] pr-4 pl-[19px] hover:bg-gray-900">
+        <p className="text-body-2 min-w-0 flex-1 truncate text-white">{title}</p>
+        <PlayIcon className="size-7 shrink-0 text-white" />
       </div>
     </Link>
   );
