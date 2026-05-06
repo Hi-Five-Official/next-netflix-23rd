@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
@@ -12,23 +12,36 @@ import AnimationNetflix from "@/public/lotties/lottie_netflix_animation.json";
 const Page = () => {
   const router = useRouter();
   const [started, setStarted] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
   const handleStart = async () => {
     if (started) return;
     setStarted(true);
     const audio = new Audio("/sounds/audio_netflix_animation.mp3");
+    audioRef.current = audio;
 
     try {
       await audio.play();
     } catch (error) {
       console.error("오디오 재생 실패:", error);
     }
+  };
 
-    setTimeout(() => {
-      audio.pause();
-      audio.currentTime = 0;
-      router.push("/home");
-    }, 3000);
+  const handleComplete = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    router.push("/home");
   };
 
   return (
@@ -38,7 +51,7 @@ const Page = () => {
           <NetflixIcon className="w-75 transition-transform duration-300 hover:scale-110" />
         </button>
       ) : (
-        <Lottie animationData={AnimationNetflix} loop={false} />
+        <Lottie animationData={AnimationNetflix} loop={false} onComplete={handleComplete} />
       )}
     </div>
   );

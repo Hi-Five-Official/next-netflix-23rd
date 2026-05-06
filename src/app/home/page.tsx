@@ -8,7 +8,7 @@ import TrendingSection from "@/components/home/TrendingSection";
 const page = () => {
   return (
     <div className="relative">
-      <div className="sticky top-0 z-10">
+      <div className="z-sticky sticky top-0">
         <Header />
       </div>
       <div className="-mt-26 flex flex-col gap-9 pb-28">

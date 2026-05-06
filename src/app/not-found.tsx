@@ -16,7 +16,7 @@ const page = () => {
         className="w-full object-cover"
       />
       <div className="bg-gradient-thumbnail absolute inset-0" />
-      <div className="sticky top-0 z-10">
+      <div className="z-sticky sticky top-0">
         <Header />
       </div>
       <div className="relative -mt-26 flex h-full flex-col items-center justify-center gap-5 px-5">
