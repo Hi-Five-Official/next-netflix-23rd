@@ -28,13 +28,19 @@ export default function SearchPage() {
     isFetchingNextPage: isFetchingNextTopSearchPage,
   } = useTopSearches();
 
-  const topSearches =
+  const removeDuplicateItems = <T extends { id: number; media_type: string }>(items: T[]) => {
+    return Array.from(new Map(items.map(item => [`${item.media_type}-${item.id}`, item])).values());
+  };
+  // 중복된 항목 제거. 뒤에 나온 데이터가 앞의 데이터를 덮어씀
+
+  const topSearches = removeDuplicateItems(
     topSearchData?.pages
       .flatMap(page => page.results)
       .filter(item => item.media_type === "movie" || item.media_type === "tv")
-      .filter(item => item.poster_path) ?? [];
+      .filter(item => item.poster_path) ?? [],
+  );
 
-  const searchResults =
+  const searchResults = removeDuplicateItems(
     searchData?.pages
       .flatMap(page => page.results)
       .filter(item => {
@@ -43,7 +49,8 @@ export default function SearchPage() {
         }
 
         return item.poster_path;
-      }) ?? [];
+      }) ?? [],
+  );
 
   const handleScroll = useCallback(() => {
     if (hasKeyword) {
@@ -89,12 +96,7 @@ export default function SearchPage() {
 
       {hasKeyword && (
         <div>
-          <SearchResultList
-            variant="result"
-            results={searchResults}
-            keyword={trimmedKeyword}
-            isLoading={isSearchLoading}
-          />
+          <SearchResultList variant="result" results={searchResults} isLoading={isSearchLoading} />
 
           {isFetchingNextSearchPage && (
             <div className="text-heading-1 py-4 text-center text-gray-600">더 불러오는 중...</div>

@@ -13,7 +13,6 @@ type SearchResultListProps =
   | {
       variant: "result";
       results: TmdbSearchResult[];
-      keyword: string;
       isLoading?: boolean;
     };
 
