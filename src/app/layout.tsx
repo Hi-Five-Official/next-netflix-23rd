@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
       </head>
-      <body className="flex justify-center bg-white">
+      <body className="flex justify-center bg-black">
         <QueryProvider>
           <div className="relative min-h-dvh w-93.75 bg-black">
             {children}
