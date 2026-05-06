@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
 
-import PlayIcon from "@/assets/icons/icon_play_circle_fill.svg";
+import { PlayCircleIcon } from "@/assets/icons";
 import { TmdbMedia } from "@/types/home";
 import { TmdbSearchResult } from "@/types/search";
 
@@ -48,7 +48,7 @@ const SearchMediaItem = memo(function SearchMediaItem({ item }: SearchMediaItemP
       </div>
       <div className="flex min-w-0 flex-1 items-center justify-between py-5.75 pr-4 pl-4.75 hover:bg-gray-900">
         <p className="text-body-2 min-w-0 flex-1 truncate text-white">{title}</p>
-        <PlayIcon className="size-7 shrink-0 text-white" />
+        <PlayCircleIcon className="size-7 shrink-0 text-white" />
       </div>
     </Link>
   );

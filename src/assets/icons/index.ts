@@ -8,6 +8,5 @@ export { default as PlayCircleIcon } from "@/assets/icons/icon_play_circle_fill.
 export { default as PlayIcon } from "@/assets/icons/icon_play_fill.svg";
 export { default as PlusIcon } from "@/assets/icons/icon_plus_regular.svg";
 export { default as SearchIcon } from "@/assets/icons/icon_search_regular.svg";
-export { default as ThinSearchIcon } from "@/assets/icons/icon_search_thin.svg";
 export { default as Top10Icon } from "@/assets/icons/icon_top10_regular.svg";
 export { default as XIcon } from "@/assets/icons/icon_x_thin.svg";

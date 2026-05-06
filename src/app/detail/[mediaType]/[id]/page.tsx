@@ -32,12 +32,13 @@ export async function generateMetadata({ params }: DetailPageProps): Promise<Met
 
 const page = async ({ params }: DetailPageProps) => {
   const { mediaType, id } = await params;
+  const detail = await getDetail(mediaType as "movie" | "tv", id);
 
   return (
     <div className="flex flex-col text-white">
-      <DetailHero mediaType={mediaType as "movie" | "tv"} id={id} />
+      <DetailHero data={detail} />
       <DetailActions />
-      <DetailOverview mediaType={mediaType as "movie" | "tv"} id={id} />
+      <DetailOverview data={detail} />
     </div>
   );
 };
