@@ -7,8 +7,8 @@ import {
   TvListResponse,
 } from "@/types/home";
 
-export const getTrendingAll = () =>
-  tmdbClient<TrendingAllResponse>("/trending/all/day?language=ko-KR");
+export const getTrendingAll = (page = 1) =>
+  tmdbClient<TrendingAllResponse>(`/trending/all/day?language=ko-KR&page=${page}`);
 
 export const getPopularMovies = () =>
   tmdbClient<PopularMoviesResponse>("/movie/popular?language=ko-KR&page=1");
