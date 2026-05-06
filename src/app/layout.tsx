@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <QueryProvider>
           <div className="relative min-h-dvh w-93.75 bg-black">
             {children}
-            <div className="fixed bottom-0 z-10 w-[inherit]">
+            <div className="z-sticky fixed bottom-0 w-[inherit]">
               <BottomNavbar />
               <HomeIndicator />
             </div>

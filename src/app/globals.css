@@ -37,6 +37,10 @@
   --color-gray-700: #8c8787;
   --color-gray-600: #c4c4c4;
 
+  /* Z-Index */
+  --z-index-sticky: 10;
+  --z-index-overlay: 20;
+
   /* Font Family */
   --font-pretendard: "Pretendard Variable", sans-serif;
 

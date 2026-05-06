@@ -10,7 +10,7 @@ const BackButton = () => {
   return (
     <button
       onClick={() => router.back()}
-      className="absolute top-4 right-4 z-10 cursor-pointer text-white"
+      className="z-overlay absolute top-4 right-4 cursor-pointer text-white"
     >
       <XIcon className="size-6" />
     </button>
