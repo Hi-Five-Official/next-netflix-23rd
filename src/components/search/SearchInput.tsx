@@ -2,7 +2,7 @@
 
 import { memo } from "react";
 
-import { SearchIcon, XIcon } from "@/assets/icons";
+import { ThinSearchIcon, XIcon } from "@/assets/icons";
 
 interface SearchInputProps {
   value: string;
@@ -14,7 +14,7 @@ const SearchInput = memo(({ value, onChange, onClear }: SearchInputProps) => {
   return (
     <div className="flex h-13 w-full items-center justify-between gap-5.25 bg-gray-800 px-5">
       <div className="flex w-full items-center gap-2">
-        <SearchIcon className="size-5 text-gray-600" />
+        <ThinSearchIcon className="size-5 text-gray-600" />
         <input
           value={value}
           onChange={e => onChange(e.target.value)}
