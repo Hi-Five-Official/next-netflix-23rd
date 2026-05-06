@@ -23,7 +23,7 @@ const SearchResultList = memo(function SearchResultList(props: SearchResultListP
   if (isLoading) {
     return (
       <section className="px-6 pt-4">
-        <p className="text-sm text-gray-500">불러오는 중...</p>
+        <p className="text-body-1 text-gray-500">불러오는 중...</p>
       </section>
     );
   }
@@ -31,7 +31,7 @@ const SearchResultList = memo(function SearchResultList(props: SearchResultListP
   if (results.length === 0) {
     return (
       <section className="flex min-h-75 items-center justify-center px-6 text-center">
-        <p className="text-sm text-white">검색 결과가 없습니다.</p>
+        <p className="text-body-1 text-white">검색 결과가 없습니다.</p>
       </section>
     );
   }

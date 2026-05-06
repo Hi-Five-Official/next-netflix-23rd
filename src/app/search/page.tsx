@@ -8,11 +8,10 @@ import SearchResultList from "@/components/search/SearchResultList";
 import { useDebounce } from "@/lib/hooks/useDebounce";
 import { useSearchMulti, useTopSearches } from "@/lib/hooks/useSearchMulti";
 
-function removeDuplicateItems<T extends { id: number; media_type: string }>(items: T[]): T[] {
-  return Array.from(new Map(items.map(item => [`${item.media_type}-${item.id}`, item])).values());
-}
+const removeDuplicateItems = <T extends { id: number; media_type: string }>(items: T[]): T[] =>
+  Array.from(new Map(items.map(item => [`${item.media_type}-${item.id}`, item])).values());
 
-export default function SearchPage() {
+const Page = () => {
   const [keyword, setKeyword] = useState("");
 
   const debouncedKeyword = useDebounce(keyword, 300);
@@ -92,21 +91,18 @@ export default function SearchPage() {
       <div className="pt-11">
         <SearchInput value={keyword} onChange={setKeyword} onClear={() => setKeyword("")} />
       </div>
-      <div className="text-heading-1 flex h-[62px] items-center pt-[21px] pb-[17px] pl-[10px] text-white">
+      <div className="text-heading-1 flex items-center pt-3.5 pb-3.5 pl-4 text-white">
         {hasKeyword ? "Search Results" : "Top Searches"}
       </div>
-
       <div onScroll={handleScroll} className="min-h-0 flex-1 overflow-y-auto bg-black pb-24">
         {!hasKeyword && (
           <div>
             <SearchResultList variant="top" results={topSearches} isLoading={isTopSearchLoading} />
-
             {isFetchingNextTopSearchPage && (
-              <div className="text-heading-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
+              <div className="text-body-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
             )}
           </div>
         )}
-
         {hasKeyword && (
           <div>
             <SearchResultList
@@ -114,13 +110,14 @@ export default function SearchPage() {
               results={searchResults}
               isLoading={isSearchLoading}
             />
-
             {isFetchingNextSearchPage && (
-              <div className="text-heading-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
+              <div className="text-body-1 py-4 text-center text-gray-600">더 불러오는 중...</div>
             )}
           </div>
         )}
       </div>
     </div>
   );
-}
+};
+
+export default Page;

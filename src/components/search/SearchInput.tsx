@@ -24,7 +24,7 @@ const SearchInput = memo(({ value, onChange, onClear }: SearchInputProps) => {
       </div>
       <div className="flex items-center">
         <button onClick={onClear} type="button">
-          <XIcon className="size-4 text-gray-600" />
+          <XIcon className="size-4 cursor-pointer text-gray-600" />
         </button>
       </div>
     </div>

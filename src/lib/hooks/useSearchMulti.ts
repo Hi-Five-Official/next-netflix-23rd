@@ -14,7 +14,7 @@ export const useSearchMulti = (query: string) => {
       return lastPage.page + 1;
     },
     enabled: query.length > 0,
-    staleTime: STALE_TIME,
+    staleTime: QUERY_STALE_TIME,
     placeholderData: keepPreviousData,
   });
 };
@@ -28,6 +28,6 @@ export const useTopSearches = () => {
       if (lastPage.page >= lastPage.total_pages) return undefined;
       return lastPage.page + 1;
     },
-    staleTime: STALE_TIME,
+    staleTime: QUERY_STALE_TIME,
   });
 };
