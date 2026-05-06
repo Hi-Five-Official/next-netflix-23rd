@@ -1,11 +1,11 @@
 "use client";
 
-import type { UIEvent } from "react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import SearchInput from "@/components/search/SearchInput";
 import SearchResultList from "@/components/search/SearchResultList";
 import { useDebounce } from "@/lib/hooks/useDebounce";
+import { useIntersectionObserver } from "@/lib/hooks/useIntersectionObserver";
 import { useSearchMulti, useTopSearches } from "@/lib/hooks/useSearchMulti";
 
 const removeDuplicateItems = <T extends { id: number; media_type: string }>(items: T[]): T[] =>
@@ -55,36 +55,29 @@ const Page = () => {
     [searchData],
   );
 
-  const handleScroll = useCallback(
-    (event: UIEvent<HTMLDivElement>) => {
-      const target = event.currentTarget;
-      const isBottom = target.scrollTop + target.clientHeight >= target.scrollHeight;
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
-      if (!isBottom) return;
+  const handleLoadMore = useCallback(() => {
+    if (hasKeyword) {
+      if (hasNextSearchPage && !isFetchingNextSearchPage && !isSearchLoading) fetchNextSearchPage();
+      return;
+    }
+    if (hasNextTopSearchPage && !isFetchingNextTopSearchPage && !isTopSearchLoading)
+      fetchNextTopSearchPage();
+  }, [
+    hasKeyword,
+    hasNextSearchPage,
+    isFetchingNextSearchPage,
+    isSearchLoading,
+    fetchNextSearchPage,
+    hasNextTopSearchPage,
+    isFetchingNextTopSearchPage,
+    isTopSearchLoading,
+    fetchNextTopSearchPage,
+  ]);
 
-      if (hasKeyword) {
-        if (hasNextSearchPage && !isFetchingNextSearchPage && !isSearchLoading) {
-          fetchNextSearchPage();
-        }
-        return;
-      }
-
-      if (hasNextTopSearchPage && !isFetchingNextTopSearchPage && !isTopSearchLoading) {
-        fetchNextTopSearchPage();
-      }
-    },
-    [
-      hasKeyword,
-      hasNextSearchPage,
-      isFetchingNextSearchPage,
-      isSearchLoading,
-      fetchNextSearchPage,
-      hasNextTopSearchPage,
-      isFetchingNextTopSearchPage,
-      isTopSearchLoading,
-      fetchNextTopSearchPage,
-    ],
-  );
+  useIntersectionObserver(sentinelRef, handleLoadMore, scrollContainerRef);
 
   return (
     <div className="flex h-screen flex-col bg-black">
@@ -94,7 +87,7 @@ const Page = () => {
       <div className="text-heading-1 flex items-center pt-3.5 pb-3.5 pl-4 text-white">
         {hasKeyword ? "Search Results" : "Top Searches"}
       </div>
-      <div onScroll={handleScroll} className="min-h-0 flex-1 overflow-y-auto bg-black pb-24">
+      <div ref={scrollContainerRef} className="min-h-0 flex-1 overflow-y-auto bg-black pb-24">
         {!hasKeyword && (
           <div>
             <SearchResultList variant="top" results={topSearches} isLoading={isTopSearchLoading} />
@@ -115,6 +108,7 @@ const Page = () => {
             )}
           </div>
         )}
+        <div ref={sentinelRef} />
       </div>
     </div>
   );

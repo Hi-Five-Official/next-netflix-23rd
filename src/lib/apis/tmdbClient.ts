@@ -5,15 +5,11 @@ const defaultHeaders: HeadersInit = {
   accept: "application/json",
 };
 
-export const tmdbClient = async <T>(path: string, options?: RequestInit): Promise<T> => {
+export const tmdbClient = async <T>(path: string, revalidate = 3600): Promise<T> => {
   try {
     const res = await fetch(`${BASE_URL}${path}`, {
-      next: { revalidate: 3600 },
-      ...options,
-      headers: {
-        ...defaultHeaders,
-        ...options?.headers,
-      },
+      next: { revalidate },
+      headers: defaultHeaders,
     });
 
     if (!res.ok) {

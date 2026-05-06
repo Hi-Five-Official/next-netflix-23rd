@@ -2,7 +2,7 @@ import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query";
 
 import { getTrendingAll } from "@/lib/apis/home";
 import { searchMulti } from "@/lib/apis/search";
-import { QUERY_STALE_TIME } from "@/lib/constants/query";
+import { QUERY_GC_TIME, QUERY_STALE_TIME, TOP_SEARCHES_STALE_TIME } from "@/lib/constants/query";
 
 export const useSearchMulti = (query: string) => {
   return useInfiniteQuery({
@@ -15,6 +15,7 @@ export const useSearchMulti = (query: string) => {
     },
     enabled: query.length > 0,
     staleTime: QUERY_STALE_TIME,
+    gcTime: QUERY_GC_TIME,
     placeholderData: keepPreviousData,
   });
 };
@@ -28,6 +29,7 @@ export const useTopSearches = () => {
       if (lastPage.page >= lastPage.total_pages) return undefined;
       return lastPage.page + 1;
     },
-    staleTime: QUERY_STALE_TIME,
+    staleTime: TOP_SEARCHES_STALE_TIME,
+    gcTime: QUERY_GC_TIME,
   });
 };
