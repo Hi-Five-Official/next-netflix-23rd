@@ -1,17 +1,14 @@
 import Image from "next/image";
 
 import BackButton from "@/components/detail/BackButton";
-import { getDetail } from "@/lib/apis/detail";
 import { getTmdbImageUrl } from "@/lib/utils/tmdb";
+import { MovieDetailResponse, TvDetailResponse } from "@/types/detail";
 
 interface DetailHeroProps {
-  mediaType: "movie" | "tv";
-  id: string;
+  data: MovieDetailResponse | TvDetailResponse;
 }
 
-const DetailHero = async ({ mediaType, id }: DetailHeroProps) => {
-  const data = await getDetail(mediaType, id);
-
+const DetailHero = ({ data }: DetailHeroProps) => {
   const title = "title" in data ? data.title : data.name;
   const imagePath = data.poster_path ?? data.backdrop_path;
 
@@ -19,7 +16,7 @@ const DetailHero = async ({ mediaType, id }: DetailHeroProps) => {
     <div className="relative h-103.75 w-full">
       {imagePath && (
         <Image
-          src={getTmdbImageUrl(imagePath, "w500")}
+          src={getTmdbImageUrl(imagePath, "w780")}
           alt={title}
           fill
           sizes="375px"

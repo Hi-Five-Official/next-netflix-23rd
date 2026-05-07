@@ -2,6 +2,7 @@
 
 import "swiper/css";
 
+import { memo } from "react";
 import { FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,7 +15,11 @@ interface MediaCardCarouselProps {
   size?: "small" | "large";
 }
 
-const MediaCardCarousel = ({ items, shape = "rect", size = "small" }: MediaCardCarouselProps) => {
+const MediaCardCarousel = memo(function MediaCardCarousel({
+  items,
+  shape = "rect",
+  size = "small",
+}: MediaCardCarouselProps) {
   return (
     <Swiper
       modules={[FreeMode]}
@@ -30,6 +35,6 @@ const MediaCardCarousel = ({ items, shape = "rect", size = "small" }: MediaCardC
       ))}
     </Swiper>
   );
-};
+});
 
 export default MediaCardCarousel;

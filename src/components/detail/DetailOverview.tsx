@@ -1,13 +1,10 @@
-import { getDetail } from "@/lib/apis/detail";
+import { MovieDetailResponse, TvDetailResponse } from "@/types/detail";
 
 interface DetailOverviewProps {
-  mediaType: "movie" | "tv";
-  id: string;
+  data: MovieDetailResponse | TvDetailResponse;
 }
 
-const DetailOverview = async ({ mediaType, id }: DetailOverviewProps) => {
-  const data = await getDetail(mediaType, id);
-
+const DetailOverview = ({ data }: DetailOverviewProps) => {
   const title = "title" in data ? data.title : data.name;
 
   return (

@@ -28,7 +28,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <body className="flex justify-center bg-white">
+      <head>
+        <link rel="preconnect" href="https://image.tmdb.org" />
+        <link
+          rel="preload"
+          href="/fonts/PretendardVariable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body className="flex justify-center bg-black">
         <QueryProvider>
           <div className="relative min-h-dvh w-93.75 bg-black">
             {children}
