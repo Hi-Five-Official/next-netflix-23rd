@@ -86,22 +86,24 @@ src/
 
 <br />
 
+
 ## 🛠️ 기술 스택
 
 | 구분 | 기술 | 선택 이유 |
 | --- | --- | --- |
-| Framework | <img src="https://img.shields.io/badge/Next.js 16-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white" height="28"/> | App Router 기반 RSC로 서버 렌더링, ISR로 캐시 관리, 동적 import로 번들 최소화 |
-| Language | <img src="https://img.shields.io/badge/TypeScript 5-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white" height="28"/> | TMDB API 응답을 discriminated union으로 타입 안전하게 처리 |
-| Styling | <img src="https://img.shields.io/badge/Tailwind CSS 4-06B6D4.svg?style=for-the-badge&logo=tailwindcss&logoColor=white" height="28"/> | Figma 수치를 유틸리티 클래스로 직접 반영, clsx + tailwind-merge로 조건부 클래스 관리 |
-| Data Fetching | <img src="https://img.shields.io/badge/TanStack Query v5-FF4154.svg?style=for-the-badge&logo=reactquery&logoColor=white" height="28"/> | 검색 무한 스크롤 및 Suspense 연동, 클라이언트 캐시로 불필요한 재요청 방지 |
-| Animation | <img src="https://img.shields.io/badge/Lottie React-2E2E2E.svg?style=for-the-badge" height="28"/> | 랜딩 Netflix 로고 JSON 애니메이션 재생, dynamic import로 서버 렌더 제외 |
-| Carousel | <img src="https://img.shields.io/badge/Swiper-6332F6.svg?style=for-the-badge&logo=swiper&logoColor=white" height="28"/> | FreeMode + momentum 스크롤로 자연스러운 관성 캐러셀 구현 |
-| SVG | <img src="https://img.shields.io/badge/SVGR-2E2E2E.svg?style=for-the-badge" height="28"/> | SVG를 React 컴포넌트로 변환해 크기·스타일 자유롭게 제어 |
-| Linting | <img src="https://img.shields.io/badge/ESLint 9-4B32C3.svg?style=for-the-badge&logo=eslint&logoColor=white" height="28"/> | import 순서 자동 정렬 포함 코드 스타일 강제 |
-| Formatting | <img src="https://img.shields.io/badge/Prettier 3-1A2B34.svg?style=for-the-badge&logo=prettier&logoColor=F7B93E" height="28"/> | Tailwind 클래스 권장 순서 자동 정렬 포함 |
-| Git Hooks | <img src="https://img.shields.io/badge/Husky-2E2E2E.svg?style=for-the-badge" height="28"/> <img src="https://img.shields.io/badge/lint--staged-4B5563.svg?style=for-the-badge" height="28"/> | 커밋 전 staged 파일에 한해 lint/format 자동 실행 |
-| Package | <img src="https://img.shields.io/badge/pnpm-F69220.svg?style=for-the-badge&logo=pnpm&logoColor=white" height="28"/> | 빠른 설치 속도, content-addressable 스토리지 기반 효율적인 디스크 관리 |
-| Deploy | <img src="https://img.shields.io/badge/Vercel-000000.svg?style=for-the-badge&logo=vercel&logoColor=white" height="28"/> | GitHub 연동 자동 CD, PR별 Preview 배포 |
+| Framework | <img src="https://img.shields.io/badge/Next.js 16-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white" height="30"/> | RSC로 서버에서 직접 데이터 패칭해 클라이언트 워터폴 제거. 네이티브 fetch의 `next: { revalidate }`로 섹션별 ISR 적용, `next/dynamic`으로 클라이언트 전용 컴포넌트 번들 분리. 개발 환경 Turbopack으로 빠른 HMR 확보 |
+| Language | <img src="https://img.shields.io/badge/TypeScript 5-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white" height="30"/> | 영화·드라마가 혼재된 TMDB 응답을 `media_type` 기반 discriminated union으로 타입 정의, 런타임 오류 없는 안전한 분기 처리 |
+| Styling | <img src="https://img.shields.io/badge/Tailwind CSS 4-06B6D4.svg?style=for-the-badge&logo=tailwindcss&logoColor=white" height="30"/> | Figma 수치를 별도 CSS 파일 없이 유틸리티 클래스로 직접 반영. clsx + tailwind-merge를 묶은 `cn` 유틸로 조건부 클래스 충돌 방지 |
+| Data Fetching | <img src="https://img.shields.io/badge/TanStack Query v5-FF4154.svg?style=for-the-badge&logo=reactquery&logoColor=white" height="30"/> | `useSuspenseInfiniteQuery`로 무한 스크롤과 Suspense를 선언적으로 연동. staleTime·gcTime 설정으로 동일 검색어 재요청 방지 |
+| Animation | <img src="https://img.shields.io/badge/Lottie React-2E2E2E.svg?style=for-the-badge" height="30"/> | Netflix 로고 애니메이션을 JSON 파일만으로 재생. `next/dynamic` lazy 로드로 랜딩 외 페이지에서 번들 제외 |
+| Carousel | <img src="https://img.shields.io/badge/Swiper-6332F6.svg?style=for-the-badge&logo=swiper&logoColor=white" height="30"/> | CSS scroll-snap으로 구현 불가한 iOS 스크롤 물리 효과를 FreeMode + momentum으로 자연스럽게 구현 |
+| SVG | <img src="https://img.shields.io/badge/SVGR-2E2E2E.svg?style=for-the-badge" height="30"/> | SVG를 React 컴포넌트로 변환해 `className`으로 크기·색상 자유 제어. Turbopack rules에서 `*.svg` import 자동 처리 |
+| Linting | <img src="https://img.shields.io/badge/ESLint 9-4B32C3.svg?style=for-the-badge&logo=eslint&logoColor=white" height="30"/> | `eslint-config-next`로 Next.js 이미지 최적화·Link 사용 등 프레임워크 규칙 자동 검사. RSC·클라이언트 컴포넌트·API·타입·아이콘 등 다양한 레이어에 걸친 import 경로를 `simple-import-sort`로 일관성 있게 정렬 |
+| Formatting | <img src="https://img.shields.io/badge/Prettier 3-1A2B34.svg?style=for-the-badge&logo=prettier&logoColor=F7B93E" height="30"/> | Tailwind 유틸리티 클래스를 대량으로 사용하는 프로젝트 특성상 `prettier-plugin-tailwindcss`로 클래스 선언 순서를 권장 순서로 자동 정렬 |
+| Git Hooks | <img src="https://img.shields.io/badge/Husky-2E2E2E.svg?style=for-the-badge" height="30"/> <img src="https://img.shields.io/badge/lint--staged-4B5563.svg?style=for-the-badge" height="30"/> | 전체 파일이 아닌 staged 파일에만 lint·format을 실행해 커밋 속도 유지. 두 명이 작업하는 환경에서 코드 품질 기준 자동 통일 |
+| Package | <img src="https://img.shields.io/badge/pnpm-F69220.svg?style=for-the-badge&logo=pnpm&logoColor=white" height="30"/> | content-addressable 스토리지로 중복 패키지 저장 없이 디스크 절약, 엄격한 의존성 격리로 유령 의존성 방지 |
+| Deploy | <img src="https://img.shields.io/badge/Vercel-000000.svg?style=for-the-badge&logo=vercel&logoColor=white" height="30"/> | Next.js와 최적 통합, PR별 Preview URL 자동 생성으로 머지 전 실환경 검증 가능 |
+
 
 <br />
 
