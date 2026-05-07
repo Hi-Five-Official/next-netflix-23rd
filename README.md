@@ -1,83 +1,150 @@
-# 5주차 과제: Next Netflix 🎬🍿
+<p align="center">
+  <img width="110" src="public/favicon.svg" alt="Next Netflix Logo" />
+</p>
 
-## 서론
+<h1 align="center">Next Netflix</h1>
 
-안녕하세요, 프론트엔드 운영진 **원채영**입니다! 🔥🤍 <br/><br/>
-이번 주부터는 새 프로젝트인 **Netflix 클론코딩**을 진행합니다! <br/>
-이번 과제에서는 **Next.js**를 활용해 **SSR(Server Side Rendering)** 을 직접 경험해보고, <br/>
-주어진 **Figma 디자인**을 활용해 스타일링 하는 방법을 이해하는 것을 목표로 합니다. <br/><br/>
-또한 이번 주부터는 프론트 페어와 함께하는 첫 과제인 만큼, 팀별로 미리 **호흡**을 맞춰볼 수 있는 좋은 기회가 될 것 같습니다.<br/>
-그럼 이번 과제도 모두 파이팅입니다!!!! 🔥🔥
+<p align="center">
+  <b>CEOS 23rd Week 5~6</b>
+</p>
 
----
+<p align="center">
+  <a href="https://next-netflix-23rd.vercel.app/">🔗 배포 링크</a>
+</p>
 
-## 과제
+<br />
 
-### ⭐ 과제 목표
+> Next.js App Router와 TMDB API를 활용해 구현한 Netflix 클론 프로젝트입니다. <br />
+> React Server Components로 홈·상세 데이터를 서버에서 렌더링하고, 무한 스크롤과 Suspense 기반 스켈레톤 UI로 빠른 사용자 경험을 제공합니다.
 
-- Next.js 사용법을 공부해봅니다.
-- Figma로 주어지는 디자인으로 스타일링 하는 방식에 익숙해집니다.
-- Git을 이용한 협업 방식에 익숙해집니다.
-- 프론트엔드와 백엔드 시스템에 대한 흐름을 이해합니다.
+<br />
 
-### 📅 기한
+## ✨ 주요 기능
 
-> 2026년 5월 2일 토요일 (기한 엄수)
+### 🎬 랜딩
 
-### ✅ 필수 요건
+- Netflix 로고 클릭 시 Lottie 애니메이션과 효과음이 함께 재생되며, 완료 즉시 홈으로 자동 이동
+- 애니메이션 라이브러리를 동적 import로 처리해 초기 번들에서 제외
 
-- [결과화면](https://next-netflix-21th-suyoungswim.vercel.app/)의 랜딩 페이지와 메인 페이지를 구현합니다.
-- [Figma](https://www.figma.com/design/t9UWQMvti88h5oXkXYkc1r/Netflix-Figma?node-id=0-1&m=dev&t=RMIJ6HupyivB6i21-1)의 디자인을 그대로 구현합니다.
-- Open api를 사용해서 데이터 패칭을 진행합니다. (ex. [themoviedb API](https://developers.themoviedb.org/3/getting-started/introduction))
-- `yarn`, `yarn berry`, `npm`, `pnpm`등 패키지 매니저를 직접 선택해 Next.js를 세팅해 봅니다.
+### 🏠 홈
 
-### 👍🏻 선택 요건
+- 일별 트렌딩 콘텐츠를 서버에서 패칭해 4초 간격 자동 슬라이드 히어로 배너로 표시
+- 백그라운드 탭 전환 시 슬라이드 인터벌 자동 정지, 복귀 시 재개
+- **Previews** / **Netflix Originals** / **Animation Movies** / **Korean Movies** — 4개 섹션 캐러셀
+- 각 섹션은 서버 컴포넌트에서 직접 패칭, ISR로 섹션별 캐시 TTL 설정 (트렌딩 1시간 / 오리지널·한국영화 6시간)
 
-- SSR(Server Side Rendering)을 적용해서 구현합니다.
-- 웹 폰트를 사용합니다.
-- 반응형을 고려합니다.
+### 🔍 검색
 
-### 👥 Research Question
+- 300ms 디바운스 처리 후 Top Searches ↔ Search Results 자동 전환
+- IntersectionObserver 기반 무한 스크롤로 자연스러운 페이지 로드
+- Suspense + 스켈레톤 UI로 로딩 상태 선언적 처리
+- 페이지 간 중복 결과 제거 및 클라이언트 캐싱으로 불필요한 재요청 방지
 
-- 전반적인 협업 과정에 대해 알려주세요. 👏🏻 <br/>
-  (프로젝트에서 해당 패키지 매니저를 선택한 이유, 파일 구조 컨벤션을 어떻게 지켰는지, <br/>업무 분담과 소통 방식은 어떻게 진행했는지를 함께 정리해 주세요. 21기, 22기 PR을 참고하시면 좋습니다!)
+### 🎞️ 상세
 
-### 🔑 Review Questions
+- 영화·드라마 상세 페이지를 서버에서 렌더링 — 클라이언트 재요청 없음
+- 콘텐츠별 OG 메타태그 동적 생성 (타이틀, 설명, backdrop 이미지)
+- 줄거리 없는 콘텐츠에 대한 fallback 처리
 
-- React 18 버전의 변경점에 대해 설명해주세요.
-  - 서버 컴포넌트와 클라이언트 컴포넌트
-  - lazy loading과 Suspense 컴포넌트
-  - automatic batching, Concurrent Rendering 등 추가적으로 더 설명해주셔도 됩니다!
+### 🔧 공통
 
----
+- 5탭 하단 내비게이션 바 (현재 탭 하이라이트, 랜딩 페이지에서 미표시)
+- AVIF/WebP 이미지 자동 변환 및 `sizes` 기반 브라우저 최적화
+- SVG 아이콘 전체를 React 컴포넌트로 관리 (SVGR)
+- 런타임 에러 바운더리 · 커스텀 404 페이지 제공
 
-### **🔗 링크 및 참고자료**
+<br />
 
-(React)
+## 📁 폴더 구조
 
-- [useCallback과 React.Memo를 이용한 렌더링 최적화](https://velog.io/@yejinh/useCallback%EA%B3%BC-React.Memo%EC%9D%84-%ED%86%B5%ED%95%9C-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%B5%9C%EC%A0%81%ED%99%94)
-- [성능 최적화](https://ui.toast.com/fe-guide/ko_PERFORMANCE)
-- [React 18의 새로운 기능](https://www.youtube.com/watch?v=7mkQi0TlJQo)
-- [react 서버 컴포넌트가 해결하는 문제들 in kakao 기술 블로그](https://tech.kakaopay.com/post/react-server-components/)
+```text
+src/
+├─ app/
+│  ├─ detail/[mediaType]/[id]/  # 상세 페이지 (동적 라우트)
+│  ├─ home/                     # 홈 페이지
+│  ├─ search/                   # 검색 페이지
+│  ├─ error.tsx                 # 런타임 에러 바운더리
+│  ├─ loading.tsx               # 페이지 전환 로딩
+│  ├─ not-found.tsx             # 404 페이지
+│  ├─ layout.tsx                # 루트 레이아웃
+│  └─ page.tsx                  # 랜딩 페이지
+├─ assets/icons/                # SVG 아이콘 (SVGR)
+├─ components/
+│  ├─ common/                   # Header, BottomNavbar, Button, HomeIndicator
+│  ├─ home/                     # TrendingHero, MediaCardCarousel, 각 섹션
+│  ├─ search/                   # SearchInput, SearchContent, SearchResultList 등
+│  └─ detail/                   # DetailHero, DetailOverview, DetailActions
+├─ constants/                   # 내비게이션 탭, TMDB 상수
+├─ lib/
+│  ├─ apis/                     # TMDB fetch 함수 및 클라이언트
+│  ├─ constants/                # TanStack Query 캐시 설정
+│  ├─ hooks/                    # useDebounce, useIntersectionObserver
+│  └─ utils/                    # cn, tmdb 이미지 URL 빌더 등
+├─ providers/                   # QueryProvider
+└─ types/                       # TMDB API 응답 타입
+```
 
-(Vercel)
+<br />
 
-- [vercel의 배포 방식](https://www.youtube.com/watch?v=8q-jCvLWwKc&t=11s)
-- [조직 레포를 우회해 무료 배포하는 법](https://bori-note.tistory.com/73)
+## 🛠️ 기술 스택
 
-(랜딩페이지 Netflix 로고)
+| 구분 | 기술 | 선택 이유 |
+| --- | --- | --- |
+| Framework | <img src="https://img.shields.io/badge/Next.js 16-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white" height="28"/> | App Router 기반 RSC로 서버 렌더링, ISR로 캐시 관리, 동적 import로 번들 최소화 |
+| Language | <img src="https://img.shields.io/badge/TypeScript 5-3178C6.svg?style=for-the-badge&logo=typescript&logoColor=white" height="28"/> | TMDB API 응답을 discriminated union으로 타입 안전하게 처리 |
+| Styling | <img src="https://img.shields.io/badge/Tailwind CSS 4-06B6D4.svg?style=for-the-badge&logo=tailwindcss&logoColor=white" height="28"/> | Figma 수치를 유틸리티 클래스로 직접 반영, clsx + tailwind-merge로 조건부 클래스 관리 |
+| Data Fetching | <img src="https://img.shields.io/badge/TanStack Query v5-FF4154.svg?style=for-the-badge&logo=reactquery&logoColor=white" height="28"/> | 검색 무한 스크롤 및 Suspense 연동, 클라이언트 캐시로 불필요한 재요청 방지 |
+| Animation | <img src="https://img.shields.io/badge/Lottie React-2E2E2E.svg?style=for-the-badge" height="28"/> | 랜딩 Netflix 로고 JSON 애니메이션 재생, dynamic import로 서버 렌더 제외 |
+| Carousel | <img src="https://img.shields.io/badge/Swiper-6332F6.svg?style=for-the-badge&logo=swiper&logoColor=white" height="28"/> | FreeMode + momentum 스크롤로 자연스러운 관성 캐러셀 구현 |
+| SVG | <img src="https://img.shields.io/badge/SVGR-2E2E2E.svg?style=for-the-badge" height="28"/> | SVG를 React 컴포넌트로 변환해 크기·스타일 자유롭게 제어 |
+| Linting | <img src="https://img.shields.io/badge/ESLint 9-4B32C3.svg?style=for-the-badge&logo=eslint&logoColor=white" height="28"/> | import 순서 자동 정렬 포함 코드 스타일 강제 |
+| Formatting | <img src="https://img.shields.io/badge/Prettier 3-1A2B34.svg?style=for-the-badge&logo=prettier&logoColor=F7B93E" height="28"/> | Tailwind 클래스 권장 순서 자동 정렬 포함 |
+| Git Hooks | <img src="https://img.shields.io/badge/Husky-2E2E2E.svg?style=for-the-badge" height="28"/> <img src="https://img.shields.io/badge/lint--staged-4B5563.svg?style=for-the-badge" height="28"/> | 커밋 전 staged 파일에 한해 lint/format 자동 실행 |
+| Package | <img src="https://img.shields.io/badge/pnpm-F69220.svg?style=for-the-badge&logo=pnpm&logoColor=white" height="28"/> | 빠른 설치 속도, content-addressable 스토리지 기반 효율적인 디스크 관리 |
+| Deploy | <img src="https://img.shields.io/badge/Vercel-000000.svg?style=for-the-badge&logo=vercel&logoColor=white" height="28"/> | GitHub 연동 자동 CD, PR별 Preview 배포 |
 
-- [랜딩페이지 영상](https://lottiefiles.com/free-animation/netflix-logo-swoop-6nEmnysrGE)
+<br />
 
-(Next.js)
+## 👥 팀원
 
-- [Next.js Docs](https://nextjs.org/docs)
-- [Next.js 13에서 변한 것들](https://velog.io/@hang_kem_0531/Next.js-13%EC%9D%B4-%EB%82%98%EC%99%80%EB%B2%84%EB%A0%B8%EB%8B%A4)
-- [Next.js 14에서 변한 것들](https://velog.io/@lee_1124/Next.js-14-%EC%97%85%EB%8D%B0%EC%9D%B4%ED%8A%B8)
-- [Next.js 15, 16](https://beam307.github.io/2026/03/18/nextjs16-vs15/)
-- [React & Next.js에서 발견된 취약점-(CVE-2025-55182(React2Shell)](https://news.hada.io/topic?id=24874)
+<table>
+  <tr>
+    <td align="center" width="200">
+      <a href="https://github.com/waldls">
+        <img src="https://github.com/waldls.png" width="130" style="border-radius:50%" />
+        <br /><br />
+        <b>waldls</b>
+      </a>
+      <br />
+      <sub>Frontend</sub>
+    </td>
+    <td align="center" width="200">
+      <a href="https://github.com/KOJ50">
+        <img src="https://github.com/KOJ50.png" width="130" style="border-radius:50%" />
+        <br /><br />
+        <b>KOJ50</b>
+      </a>
+      <br />
+      <sub>Frontend</sub>
+    </td>
+  </tr>
+</table>
 
-(협업)
+<br />
 
-- [Git 협업 가이드](https://velog.io/@jinuku/Git-%ED%98%91%EC%97%85-%EA%B0%80%EC%9D%B4%EB%93%9C)
-- [디자이너와 개발자가 협업하기 위한 피그마 기본 기능](https://chingguhl.tistory.com/entry/%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%EA%BC%AD-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%A0-%ED%94%BC%EA%B7%B8%EB%A7%88-10%EA%B0%80%EC%A7%80-%EA%B8%B0%EB%8A%A5-%EB%94%94%EC%9E%90%EC%9D%B4%EB%84%88%EC%99%80-%EA%B0%9C%EB%B0%9C%EC%9E%90%EA%B0%80-%ED%98%91%EC%97%85%ED%95%98%EA%B8%B0-%EC%9C%84%ED%95%9C-%ED%94%BC%EA%B7%B8%EB%A7%88-%EA%B8%B0%EB%B3%B8-%EA%B8%B0%EB%8A%A5)
+## 👩🏻‍💻 실행 방법
+
+```bash
+git clone https://github.com/Hi-Five-Official/next-netflix-23rd.git
+cd next-netflix-23rd
+pnpm install
+pnpm dev
+```
+
+> TMDB API 키가 필요합니다. `.env.local` 파일을 생성하고 아래와 같이 설정하세요.
+>
+> ```
+> NEXT_PUBLIC_API_URL=https://api.themoviedb.org/3
+> NEXT_PUBLIC_API_KEY=your_tmdb_bearer_token
+> NEXT_PUBLIC_IMAGE_BASE_URL=https://image.tmdb.org
+> ```
